@@ -16,7 +16,7 @@
 
 
 ## Muuta:
-- Tuotantoympäristö main-branch
-- User storyja varten luodaan omat branchit, jotka valmiina mergetään Main-branchiin
+- Tuotantoympäristö master-branch
+- User storyja varten luodaan omat branchit, jotka valmiina mergetään master-branchiin
 - Asiakastapaamiset to 15-16
 - Ryhmätapaamiset ma 14.30, pe 9.00
