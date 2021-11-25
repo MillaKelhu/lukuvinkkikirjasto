@@ -6,6 +6,15 @@
 - Koodi on puskettu tuotantoympäristöön
 
 
+## Kirjastot
+- Flask
+- sqlite3
+- Pylint
+- Robot
+- Poetry
+- Unittest
+
+
 ## Muuta:
 - Tuotantoympäristö main-branch
 - User storyja varten luodaan omat branchit, jotka valmiina mergetään Main-branchiin
