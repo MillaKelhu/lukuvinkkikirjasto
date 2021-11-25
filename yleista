@@ -1,4 +1,4 @@
-<h1>Valmiin määritelmä:</h1>
+# Valmiin määritelmä:
 - Testikattavuus >90%
 - Kaikki testit menevät läpi
 - Staattinen analyysi ei herjaa (pylint 8/10)
@@ -6,7 +6,7 @@
 - Koodi on puskettu tuotantoympäristöön
 
 
-Muuta:
+## Muuta:
 - Tuotantoympäristö main-branch
 - User storyja varten luodaan omat branchit, jotka valmiina mergetään Main-branchiin
 - Asiakastapaamiset to 15-16
