@@ -15,3 +15,7 @@ def coverage_report(ctx):
 @task
 def lint(ctx):
 	ctx.run("pylint src")
+
+@task
+def robot(ctx):
+	ctx.run("robot src/tests")
