@@ -8,6 +8,7 @@ class LinkRepository:
         """Hakee linkin tietokannasta Pythonin dictionary-olion id-kentän
         perusteella ja palauttaa kyseisen rivin
         sqlalchemy.engine.RowProxy-oliona"""
+
         query = "SELECT * FROM Links WHERE id = :id"
 
         return self.session.execute(query, {"id": link["id"]}).fetchone()
@@ -27,7 +28,7 @@ class LinkRepository:
         query = """INSERT INTO Links (title, link_url, created_at)
                VALUES (:title, :link_url, datetime('now'))"""
         self.session.execute(query, {"title": link["title"],
-                                 "link_url": link["link_url"]})
+                                     "link_url": link["link_url"]})
 
     def delete(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion id-kentän
@@ -47,9 +48,8 @@ class LinkRepository:
         query = """UPDATE Links SET title = :title,
                link_url = :link_url WHERE id = :id"""
         self.session.execute(query, {"id": link["id"],
-                                 "title": link["title"] ,
-                                 "link_url": link["link_url"]})
-
+                                     "title": link["title"],
+                                     "link_url": link["link_url"]})
 
     def commit(self):
         """Kommitoi muutokset tietokantaan"""

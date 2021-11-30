@@ -4,6 +4,7 @@ from link_repository import LinkRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 class TestLinkRepository(unittest.TestCase):
     def setUp(self):
         dirname = os.path.dirname(__file__)
@@ -44,7 +45,8 @@ class TestLinkRepository(unittest.TestCase):
         self.link_repository.rollback()
 
     def test_update(self):
-        link = {"id": 2, "title": "Apache Spark", "link_url": "https://spark.apache.org/"}
+        link = {"id": 2, "title": "Apache Spark",
+                "link_url": "https://spark.apache.org/"}
 
         result = self.link_repository.find(link)
 
