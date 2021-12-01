@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Outfit&display=swap");
+* {
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.create-link-form {
+  margin: 50px;
+}
+
+.input-container {
+  padding: 0px;
+  height: 50px;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.input-container h3 {
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  bottom: 6px;
+  height: 20px;
+  position: absolute;
+  z-index: 0;
+}
+
+.input-container input {
+  z-index: 1;
+  position: relative;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  height: 30px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.input-container input:focus {
+  outline: none;
+}
+
+.add-button {
+  padding: 10px;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  color: white;
+  border: none;
+  background-color: #006b00;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #009e00;
+}
+
+.form-input-container {
+  margin-top: 50px;
+}
+
+.topbar-container {
+  margin: 0px;
+  height: 60px;
+  background-color: #0059ff;
+}
+
+.topbar-container a {
+  margin: 0px;
+}
+
+.topbar-container button {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+  height: 60px;
+  border: 0px;
+  border-top: 4px solid transparent;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+}
+
+.topbar-container button:hover {
+  border-top: 4px solid orange;
+}
+
+.topbar-buttons-container {
+  margin-left: 20px;
+}
+
+.home-container {
+  margin: 50px;
+}
+
+.links-container {
+  margin-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.links-container a {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  opacity: 1;
+  color: white;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 20px;
+  height: 150px;
+  min-width: 150px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #0059ff;
+}
+
+.links-container a:hover {
+  border-radius: 0px;
+  background-color: #0f63ff;
+}
+/*# sourceMappingURL=index.css.map */
