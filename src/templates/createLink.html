@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+<!-- formi jossa title, link_url -->
+{% block content %}
+
+
+<script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+<form class="create-link-form" id="create-link-form" action="/postlink" method="post">
+    <h1>Syötä lukuvinkkisi nimi ja osoite</h1>
+    <div class="form-input-container" id="form-input-container"></div>
+    <button class="add-button" type="submit">Lisää Lukuvinkki</button>
+</form>
+{% endblock %}
