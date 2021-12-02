@@ -37,7 +37,11 @@ tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>
 name = "autopep8"
 version = "1.6.0"
 description = "A tool that automatically formats Python code to conform to the PEP 8 style guide"
+<<<<<<< HEAD
 category = "main"
+=======
+category = "dev"
+>>>>>>> ab412f8bb311de5579e6d0123ba365252e5abbc0
 optional = false
 python-versions = "*"
 
@@ -227,7 +231,11 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "pycodestyle"
 version = "2.8.0"
 description = "Python style guide checker"
+<<<<<<< HEAD
 category = "main"
+=======
+category = "dev"
+>>>>>>> ab412f8bb311de5579e6d0123ba365252e5abbc0
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -358,7 +366,11 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
+<<<<<<< HEAD
 content-hash = "e95db2625c09a6bc4fc392d976708a56de60f94b02c1c9c8fce168370e4bd013"
+=======
+content-hash = "d3fe753a1ca4f192d7ea68c855c0b77be8b1577749bdfb8f2f1a7491e3ca42f1"
+>>>>>>> ab412f8bb311de5579e6d0123ba365252e5abbc0
 
 [metadata.files]
 astroid = [
