@@ -21,14 +21,15 @@ class LinkRepository:
 
     def create(self, link):
         """Luo linkki tietokantaan Pythonin dictionary-olion title- ja
-        link_url-kentistä.
+        link_url-kentistä. Palauttaa luodun rivin
+        sqlalchemy.engine.RowProxy-oliona.
         Huom. Metodin kutsujan vastuulla on kutsua commit-metodia
         muutosten tallentamiseksi"""
 
         query = """INSERT INTO Links (title, link_url, created_at)
-               VALUES (:title, :link_url, datetime('now'))"""
-        self.session.execute(query, {"title": link["title"],
-                                     "link_url": link["link_url"]})
+               VALUES (:title, :link_url, datetime('now')) RETURNING *"""
+        return self.session.execute(query, {"title": link["title"],
+                                            "link_url": link["link_url"]}).fetchone()
 
     def delete(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion id-kentän
@@ -40,16 +41,17 @@ class LinkRepository:
         self.session.execute(query, {"id": link["id"]})
 
     def update(self, link):
-        """Hae linkki tietokannasta Pythonin dictionary-olion id-kentän
-        perusteella ja päivitä sen title- ja link_url-kentät.
-        Huom. Metodin kutsujan vastuulla on kutsua commit-metodia muutosten
-        tallentamiseksi"""
+        """Hae linkki tietokannasta Pythonin dictionary-olion
+        id-kentän perusteella ja päivitä sen title- ja
+        link_url-kentät. Palauttaa muokatun rivin
+        sqlalchemy.engine.RowProxy-oliona. Huom. Metodin kutsujan
+        vastuulla on kutsua commit-metodia muutosten tallentamiseksi"""
 
         query = """UPDATE Links SET title = :title,
-               link_url = :link_url WHERE id = :id"""
-        self.session.execute(query, {"id": link["id"],
-                                     "title": link["title"],
-                                     "link_url": link["link_url"]})
+               link_url = :link_url WHERE id = :id RETURNING *"""
+        return self.session.execute(query, {"id": link["id"],
+                                    "title": link["title"],
+                                    "link_url": link["link_url"]}).fetchone()
 
     def commit(self):
         """Kommitoi muutokset tietokantaan"""
