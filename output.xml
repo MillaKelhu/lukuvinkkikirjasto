@@ -1,53 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1.2 (Python 3.9.8 on darwin)" generated="20211130 14:41:48.780" rpa="false" schemaversion="2">
-<suite id="s1" name="Tests" source="/Users/rikumattila/lukuvinkkikirjasto/src/tests">
-<suite id="s1-s1" name="Createlink" source="/Users/rikumattila/lukuvinkkikirjasto/src/tests/createlink.robot">
+<robot generator="Robot 4.1.2 (Python 3.8.10 on linux)" generated="20211202 14:06:35.046" rpa="false" schemaversion="2">
+<suite id="s1" name="Src" source="/home/millakel/Documents/Koulu/2_vuosi/2_periodi/Ohtu/lukuvinkkikirjasto/src">
+<suite id="s1-s1" name="Tests" source="/home/millakel/Documents/Koulu/2_vuosi/2_periodi/Ohtu/lukuvinkkikirjasto/src/tests">
+<suite id="s1-s1-s1" name="Createlink" source="/home/millakel/Documents/Koulu/2_vuosi/2_periodi/Ohtu/lukuvinkkikirjasto/src/tests/createlink.robot">
 <kw name="Open And Configure BROWSER" library="resource" type="SETUP">
 <kw name="Open Browser" library="SeleniumLibrary">
 <arg>browser=${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20211130 14:41:49.024" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<status status="PASS" starttime="20211130 14:41:49.023" endtime="20211130 14:41:51.084"/>
+<msg timestamp="20211202 14:06:35.160" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<status status="PASS" starttime="20211202 14:06:35.160" endtime="20211202 14:06:35.992"/>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20211130 14:41:51.086" endtime="20211130 14:41:51.282"/>
+<status status="PASS" starttime="20211202 14:06:35.992" endtime="20211202 14:06:36.096"/>
 </kw>
 <kw name="Set Selenium Speed" library="SeleniumLibrary">
 <arg>${DELAY}</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" starttime="20211130 14:41:51.282" endtime="20211130 14:41:51.284"/>
+<status status="PASS" starttime="20211202 14:06:36.097" endtime="20211202 14:06:36.097"/>
 </kw>
-<status status="PASS" starttime="20211130 14:41:49.023" endtime="20211130 14:41:51.284"/>
+<status status="PASS" starttime="20211202 14:06:35.160" endtime="20211202 14:06:36.097"/>
 </kw>
-<test id="s1-s1-t1" name="Open Link Form Page">
+<test id="s1-s1-s1-t1" name="Open Link Form Page">
 <kw name="Go To Add Link Page" library="resource">
 <kw name="Go To" library="SeleniumLibrary">
 <arg>${ADDLINK URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20211130 14:41:51.288" level="INFO">Opening url 'http://localhost:5000/addlink'</msg>
-<status status="PASS" starttime="20211130 14:41:51.288" endtime="20211130 14:41:53.619"/>
+<msg timestamp="20211202 14:06:36.099" level="INFO">Opening url 'http://localhost:5000/addlink'</msg>
+<status status="PASS" starttime="20211202 14:06:36.099" endtime="20211202 14:06:36.865"/>
 </kw>
-<status status="PASS" starttime="20211130 14:41:51.287" endtime="20211130 14:41:53.620"/>
+<status status="PASS" starttime="20211202 14:06:36.098" endtime="20211202 14:06:36.866"/>
 </kw>
 <kw name="Add Link Page Should Be Open" library="resource">
 <kw name="Page Should Contain" library="SeleniumLibrary">
 <arg>Syötä lukuvinkkisi nimi ja osoite</arg>
 <doc>Verifies that current page contains ``text``.</doc>
-<msg timestamp="20211130 14:41:54.653" level="INFO">Current page contains text 'Syötä lukuvinkkisi nimi ja osoite'.</msg>
-<status status="PASS" starttime="20211130 14:41:53.622" endtime="20211130 14:41:54.654"/>
+<msg timestamp="20211202 14:06:37.911" level="INFO">Current page contains text 'Syötä lukuvinkkisi nimi ja osoite'.</msg>
+<status status="PASS" starttime="20211202 14:06:36.868" endtime="20211202 14:06:37.911"/>
 </kw>
-<status status="PASS" starttime="20211130 14:41:53.620" endtime="20211130 14:41:54.654"/>
+<status status="PASS" starttime="20211202 14:06:36.867" endtime="20211202 14:06:37.912"/>
 </kw>
-<status status="PASS" starttime="20211130 14:41:51.285" endtime="20211130 14:41:54.655"/>
+<status status="PASS" starttime="20211202 14:06:36.097" endtime="20211202 14:06:37.912"/>
 </test>
 <kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20211130 14:41:54.659" endtime="20211130 14:41:55.242"/>
+<status status="PASS" starttime="20211202 14:06:37.915" endtime="20211202 14:06:38.475"/>
 </kw>
-<status status="PASS" starttime="20211130 14:41:48.817" endtime="20211130 14:41:55.242"/>
+<status status="PASS" starttime="20211202 14:06:35.064" endtime="20211202 14:06:38.476"/>
 </suite>
-<status status="PASS" starttime="20211130 14:41:48.784" endtime="20211130 14:41:55.245"/>
+<status status="PASS" starttime="20211202 14:06:35.063" endtime="20211202 14:06:38.480"/>
+</suite>
+<status status="PASS" starttime="20211202 14:06:35.047" endtime="20211202 14:06:38.483"/>
 </suite>
 <statistics>
 <total>
@@ -56,11 +59,12 @@
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
-<stat pass="1" fail="0" skip="0" id="s1-s1" name="Createlink">Tests.Createlink</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Src">Src</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Tests">Src.Tests</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1" name="Createlink">Src.Tests.Createlink</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20211130 14:41:49.022" level="WARN">Imported library '/Users/rikumattila/lukuvinkkikirjasto/src/AppLibrary.py' contains no keywords.</msg>
+<msg timestamp="20211202 14:06:35.159" level="WARN">Imported library '/home/millakel/Documents/Koulu/2_vuosi/2_periodi/Ohtu/lukuvinkkikirjasto/src/AppLibrary.py' contains no keywords.</msg>
 </errors>
 </robot>
