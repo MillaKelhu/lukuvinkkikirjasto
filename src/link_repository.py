@@ -27,7 +27,7 @@ class LinkRepository:
         muutosten tallentamiseksi"""
 
         query = """INSERT INTO Links (title, link_url, created_at)
-               VALUES (:title, :link_url, datetime('now')) RETURNING *"""
+               VALUES (:title, :link_url, NOW())) RETURNING *"""
         return self.session.execute(query, {"title": link["title"],
                                             "link_url": link["link_url"]}).fetchone()
 
