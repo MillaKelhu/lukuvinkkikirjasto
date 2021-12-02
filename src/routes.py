@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect
-from db import db
+from db import configure_db
 from link_repository import LinkRepository
 
+
 app = Flask(__name__)
+db = configure_db(app)
 LINK_REPOSITORY = LinkRepository(db.session)
 
 @app.route("/")
