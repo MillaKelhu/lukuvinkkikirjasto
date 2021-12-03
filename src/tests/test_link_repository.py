@@ -25,11 +25,9 @@ class TestLinkRepository(unittest.TestCase):
         link = {"title": "Wheeler Graph",
                 "link_url": "https://www.sciencedirect.com/science/article/pii/S0304397517305285"}
 
-        self.link_repository.create(link)
+        result = self.link_repository.create(link)
 
-        result = self.link_repository.find_all()
-
-        self.assertEqual(len(result), 4)
+        self.assertEqual(result["id"], 4)
 
         self.link_repository.rollback()
 
@@ -52,9 +50,7 @@ class TestLinkRepository(unittest.TestCase):
 
         self.assertEqual(result[1], "Spark")
 
-        self.link_repository.update(link)
-
-        result = self.link_repository.find(link)
+        result = self.link_repository.update(link)
 
         self.assertEqual(result[1], "Apache Spark")
 
