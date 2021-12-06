@@ -19,3 +19,7 @@ def lint(ctx):
 @task
 def robot(ctx):
 	ctx.run("robot src/tests")
+
+@task
+def test(ctx):
+	ctx.run("pytest src")
