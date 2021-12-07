@@ -1,1 +1,1 @@
-TuotantoympäristÖ: [Heroku](https://ryhma4ohtu2021miniproject.herokuapp.com/)
+Tuotantoympäristö: [Heroku](https://ryhma4ohtu2021miniproject.herokuapp.com/)
