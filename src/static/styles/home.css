@@ -1,0 +1,87 @@
+.home-container {
+  margin: 50px;
+}
+
+.links-container {
+  margin: 0px auto;
+  width: 800px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.link-card {
+  height: 50px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.link-card h3:nth-child(1) {
+  width: 200px;
+  margin-left: 5px;
+}
+
+.link-card .link-url {
+  text-decoration: underline;
+  display: block;
+  overflow: hidden;
+  width: 350px;
+}
+
+.link-card .link-card-button {
+  margin-left: auto;
+  margin-right: 15px;
+}
+
+.link-card button {
+  font-size: 16px;
+  border: none;
+  color: white;
+  background-color: #006b00;
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+}
+
+.link-card button:hover {
+  background-color: #009e00;
+}
+
+.links-container-topbar {
+  color: white;
+  background-color: #0059ff;
+}
+
+.lukuvinkki-haku {
+  color: white;
+  font-size: 16px;
+  background-color: transparent;
+  height: 60%;
+  border: none;
+  border-bottom: 2px solid white;
+  margin-right: 50px;
+  margin-left: auto;
+}
+
+.lukuvinkki-haku:focus {
+  outline: none;
+}
+
+.search-button {
+  width: 100px;
+  height: 40px;
+}
+
+form {
+  margin-left: auto;
+}
+/*# sourceMappingURL=home.css.map */

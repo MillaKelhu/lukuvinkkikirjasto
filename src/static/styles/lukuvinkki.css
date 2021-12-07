@@ -1,0 +1,23 @@
+.link-button {
+  font-size: 14px;
+  border: none;
+  display: block;
+  margin: 0px auto;
+  width: 120px;
+  height: 40px;
+  background-color: #006b00;
+}
+
+.link-button:hover {
+  background-color: #009e00;
+}
+
+h2 {
+  text-align: center;
+}
+
+.lukuvinkki-container {
+  margin: 0px auto;
+  width: 600px;
+}
+/*# sourceMappingURL=lukuvinkki.css.map */

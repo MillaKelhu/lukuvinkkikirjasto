@@ -1,0 +1,21 @@
+
+.link-button {
+    font-size: 14px;
+    border: none;
+    display: block;
+    margin: 0px auto;
+    width: 120px;
+    height: 40px;
+    background-color: rgb(0, 107, 0);
+    &:hover {
+        background-color: lighten(rgb(0, 107, 0), 10%);
+    }
+}
+
+h2 {
+    text-align: center;
+}
+.lukuvinkki-container {
+    margin: 0px auto;
+    width: 600px;
+}

@@ -22,11 +22,21 @@ def post_link():
     title = request.form["title"]
     link_url = request.form["link_url"]
     data = {"title":title,
-            "link_url":link_url}
+            "link_url":link_url,
+            "created_by": 1
+            }
     LINK_REPOSITORY.create(data)
     LINK_REPOSITORY.commit()
     return redirect("/")
 
-@app.route("/<int:link_id>")
+@app.route("/links/<int:link_id>")
 def show_link(link_id):
     data = LINK_REPOSITORY.find({"id":link_id})
+    return render_template("lukuvinkki.html", lukuvinkki=data)
+
+@app.route("/lukuvinkki_haku", methods=["GET"])
+def search_link():
+    print(request.args.get("search"))
+    data = LINK_REPOSITORY.find_all()
+    data = filter(lambda x: request.args.get("search") in "{}{}".format(x.title, x.link_url) or request.args.get("search")=="", data)
+    return render_template("home.html", lukuvinkit = data)
