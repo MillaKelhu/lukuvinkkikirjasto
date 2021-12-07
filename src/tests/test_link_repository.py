@@ -4,17 +4,17 @@ from link_repository import LinkRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 class TestLinkRepository(unittest.TestCase):
     def setUp(self):
-        dirname = os.path.dirname(__file__)
-        dbpath = os.path.join(dirname, "test.db")
-        engine = create_engine(f"sqlite:///{dbpath}")
+        engine = create_engine(f"postgresql+psycopg2://localhost")
         Session = sessionmaker()
         Session.configure(bind=engine)
         session = Session()
 
         self.link_repository = LinkRepository(session)
+
+    def tearDown(self):
+        pass
 
     def test_find_all(self):
         result = self.link_repository.find_all()
@@ -23,11 +23,12 @@ class TestLinkRepository(unittest.TestCase):
 
     def test_create(self):
         link = {"title": "Wheeler Graph",
-                "link_url": "https://www.sciencedirect.com/science/article/pii/S0304397517305285"}
+                "link_url": "https://www.sciencedirect.com/science/article/pii/S0304397517305285",
+                "created_by": 1}
 
-        result = self.link_repository.create(link)
-
-        self.assertEqual(result["id"], 4)
+        self.link_repository.create(link)
+        result = self.link_repository.find_all()
+        self.assertEqual(len(result), 4)
 
         self.link_repository.rollback()
 
