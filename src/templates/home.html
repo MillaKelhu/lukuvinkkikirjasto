@@ -3,12 +3,18 @@
 {% block content %}
 <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
 <div class="home-container">
-    <h1>Lukuvinkit</h1> 
     <div class="links-container">
+        <h1>Lukuvinkit</h1> 
+        <div class="link-card links-container-topbar">
+            <h3>Nimi</h3>
+            <h3>Osoite</h3>
+        </div>
         {% for i in lukuvinkit %}
-            <a href="{{i.link_url}}" class="link-card">
+            <div class="link-card">
                 <h3>{{i.title}}</h3>
-            </a>
+                <a class="link-url" href="{{i.link_url}}">{{i.link_url}}</a>
+                <a class="link-card-button" href="links/{{i.id}}"><button>Avaa</button></a>
+            </div>
         {% endfor %}
     </div>
 </div>

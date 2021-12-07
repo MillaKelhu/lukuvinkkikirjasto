@@ -10,8 +10,9 @@ Open Link Form Page
 
 Add Link Correctly
     Set Title  Wikipedia
-    Set Link Url  wikipedia.com
+    Set Url  wikipedia.com
     Submit Link
+    Page Should Contain  Lukuvinkit
 
 *** Keywords ***
 Set Title
@@ -23,4 +24,4 @@ Set Url
     Input Text  link_url  ${link_url}
 
 Submit Link
-    Click Button  Lisää Lukuvinkki 
+    Click Button  Lisää Lukuvinkki
