@@ -49,7 +49,7 @@ class TestLinkRepository(unittest.TestCase):
         self.user_repository.rollback()
 
     def test_update(self):
-        user = {"user_id": 1,
+        user = {"id": 1,
                 "username": "user_one",
                 "password": "better_password"
                 }
@@ -65,7 +65,7 @@ class TestLinkRepository(unittest.TestCase):
         self.user_repository.rollback()
 
     def test_find(self):
-        user = {"user_id": 1}
+        user = {"id": 1}
         result = self.user_repository.find(user)
 
         self.assertEqual(result[1], "user_one")

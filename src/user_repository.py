@@ -5,13 +5,13 @@ class UserRepository:
         self.session = session
 
     def find(self, user):
-        """Hakee käyttäjän tietokannasta Pythonin dictionary-olion user_id-kentän
+        """Hakee käyttäjän tietokannasta Pythonin dictionary-olion id-kentän
         perusteella ja palauttaa kyseisen rivin
         sqlalchemy.engine.RowProxy-oliona"""
 
-        query = "SELECT * FROM Users WHERE user_id = :user_id"
+        query = "SELECT * FROM Users WHERE id = :id"
 
-        return self.session.execute(query, {"user_id": user["user_id"]}).fetchone()
+        return self.session.execute(query, {"id": user["id"]}).fetchone()
 
     def find_all(self):
         """Hakeee kaikki käyttäjät tietokannasta ja palauttaa ne listana
@@ -33,24 +33,24 @@ class UserRepository:
                                     ).fetchone()
 
     def delete(self, user):
-        """Hae käyttäjä tietokannasta Pythonin dictionary-olion user_id-kentän
+        """Hae käyttäjä tietokannasta Pythonin dictionary-olion id-kentän
         perusteella ja poista kyseinen rivi.
         Huom. Metodin kutsujan vastuulla on kutsua commit-metodia muutosten
         tallentamiseksi"""
 
-        query = "DELETE FROM Users WHERE user_id = :user_id"
-        self.session.execute(query, {"user_id": user["user_id"]})
+        query = "DELETE FROM Users WHERE id = :id"
+        self.session.execute(query, {"id": user["id"]})
 
     def update(self, user):
         """Hae käyttäjä tietokannasta Pythonin dictionary-olion
-        user_id-kentän perusteella ja päivitä sen username- ja
+        id-kentän perusteella ja päivitä sen username- ja
         password-kentät. Palauttaa muokatun rivin
         sqlalchemy.engine.RowProxy-oliona. Huom. Metodin kutsujan
         vastuulla on kutsua commit-metodia muutosten tallentamiseksi"""
 
         query = """UPDATE Users SET username = :username,
-               password = :password WHERE user_id = :user_id RETURNING *"""
-        return self.session.execute(query, {"user_id": user["user_id"],
+               password = :password WHERE id = :id RETURNING *"""
+        return self.session.execute(query, {"id": user["id"],
                                     "username": user["username"],
                                     "password": user["password"]}).fetchone()
 
