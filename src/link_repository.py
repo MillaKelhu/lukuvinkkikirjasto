@@ -33,6 +33,7 @@ class LinkRepository:
                                             "created_by": link["created_by"]}
                                     ).fetchone()
 
+
     def delete(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion id-kentän
         perusteella ja poista kyseinen rivi.

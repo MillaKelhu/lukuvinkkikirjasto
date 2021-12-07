@@ -6,7 +6,8 @@ Library  ../AppLibrary.py
 ${SERVER}  localhost:5000
 ${BROWSER}  chrome
 ${DELAY}  0.5 seconds
-${HOME URL}  http://${SERVER}
+${HOME URL}  http://localhost:5000
+${ADDLINK URL}  http://localhost:5000/addlink
 
 *** Keywords ***
 Open And Configure BROWSER
@@ -19,3 +20,9 @@ Go To Main Page
 
 Main Page Should Be Open
     Title Should Be  Lukuvinkit
+
+Go To Add Link Page
+    Go To  ${ADDLINK URL}
+
+Add Link Page Should Be Open
+    Page Should Contain  Syötä lukuvinkkisi nimi ja osoite

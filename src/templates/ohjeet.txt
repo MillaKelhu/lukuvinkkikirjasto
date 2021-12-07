@@ -1,0 +1,6 @@
+
+1. home ja createLink laajentuvat index.html:ään joka sisältää yläpalkin.
+2. home saa argumentiksi muuttujan lukuvinkit, jonka perusteella luodaan linkit etusivulle.
+Tähän tarvitaan ainakin title ja link_url.
+3. createLink formi sisältää kaksi kenttää, joiden nimet ovat title ja link_url. 
+vihreä lisää lukuvinkki painike lähettää formin osoitteeseen /postlink

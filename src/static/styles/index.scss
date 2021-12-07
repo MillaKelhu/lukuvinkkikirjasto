@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Outfit&display=swap');
+* {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
+}
+ body {
+     margin: 0px;
+     padding: 0px;
+ }
+ a {
+     text-decoration: none;
+     color: black;
+ }
+
+.create-link-form {
+    margin: 50px;
+}
+.input-container {
+    padding: 0px;
+    height: 50px;
+    position: relative;
+    h3 {
+        transition: all 200ms;
+        bottom: 6px;
+        height: 20px;
+        position: absolute;
+        z-index: 0;
+    }
+    input {
+        z-index: 1;
+        position: relative;
+        font-size: 16px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid black;
+        height: 30px;
+        margin: 0px;
+        padding: 0px;
+        &:focus {
+            outline: none;
+        }
+    }
+    margin-bottom: 50px;
+}
+.add-button {
+    padding: 10px;
+    transition: all 200ms;
+    color: rgb(255, 255, 255);
+    border: none;
+    background-color: rgb(0, 107, 0);
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    &:hover {
+        background-color: lighten(rgb(0, 107, 0), 10%)
+    }
+}
+.form-input-container {
+    margin-top: 50px;
+}
+//topbar alkaa tästä
+
+.topbar-container {
+    margin: 0px;
+    height: 60px;
+    background-color: rgb(0, 89, 255);
+    a {
+
+        margin: 0px;
+    }
+    button {
+        box-sizing: border-box;
+        cursor: pointer;
+        height: 60px;
+        border: 0px;
+        border-top: 4px solid transparent;
+        background-color: transparent;
+        color: white;
+        font-size: 20px;
+        &:hover {
+            border-top: 4px solid orange;
+        }
+    }
+}
+.topbar-buttons-container {
+    margin-left: 20px;
+}
+.home-icon {
+}
+
+//HOME alkaa tästä
+
+.home-container {
+    margin: 50px;
+}
+.links-container {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    a {
+        box-sizing: border-box;
+        opacity: 1;
+        color: white;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        transition: all 200ms;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        height: 150px;
+        min-width: 150px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: rgb(0, 89, 255);
+        &:hover {
+            border-radius: 0px;
+            background-color: lighten(rgb(0, 89, 255), 3%);
+        }
+    }
+}
+// .appear-animation {
+//     animation: animate linear 0.5s
+
+// }
+// @keyframes animate {
+//     from {
+//         opacity: 0;
+//     }
+//     to {
+//         opacity: 1
+//     }
+// }

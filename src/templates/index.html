@@ -3,10 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>Lukuvinkit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
 </head>
 
 <body>
-    <h1>Lukuvinkit</h1>
-    
-    Tänne tulee lukuvinkkejä.
+    <div class="topbar-container">
+        <div class="topbar-buttons-container">
+            <a href="/"><button>Lukuvinkkikirjasto</button></a>
+            <a href="/addlink"><button class="">Lisää Lukuvinkki</button></a>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
 </body>
