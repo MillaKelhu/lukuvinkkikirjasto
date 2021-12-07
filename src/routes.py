@@ -1,15 +1,17 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
+
 from db import configure_db
 from link_repository import LinkRepository
 from user_repository import UserRepository
 import hashlib
-
+import os
 
 app = Flask(__name__)
 db = configure_db(app)
 LINK_REPOSITORY = LinkRepository(db.session)
 USER_REPOSITORY = UserRepository(db.session)
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
+app.secret_key=SECRET_KEY
 @app.route("/")
 def index():
     #argumenttina lukuvinkit = [...] jossa jokainen jäsen sisältää vähintään title ja link_url
@@ -25,7 +27,8 @@ def post_link():
     title = request.form["title"]
     link_url = request.form["link_url"]
     data = {"title":title,
-            "link_url":link_url}
+            "link_url":link_url,
+            "created_by": session["id"]}
     LINK_REPOSITORY.create(data)
     LINK_REPOSITORY.commit()
     return redirect("/")
@@ -57,7 +60,19 @@ def handle_register():
 
 @app.route("/handlelogin", methods=["POST"])
 def handle_login():
-    pass
+    input_password = request.form["password"]+"joiafhoufheoa3ijfla3dfnuneugyugeoj830803"
+    input_hash = hashlib.sha256(input_password.encode()).hexdigest()
+    users = USER_REPOSITORY.find_all()
+    user = list(filter(lambda x: x.username==request.form["username"], users))
+    if len(user)==0:
+        return "märrar"
+    hash = user[0]["password"]
+    if hash!=input_hash:
+        return "märrar"
+    session['id']=user[0].id
+    return redirect("/")
+
+
 
 
 
