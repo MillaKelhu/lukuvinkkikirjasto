@@ -26,10 +26,12 @@ class LinkRepository:
         Huom. Metodin kutsujan vastuulla on kutsua commit-metodia
         muutosten tallentamiseksi"""
 
-        query = """INSERT INTO Links (title, link_url, created_at)
-               VALUES (:title, :link_url, NOW()) RETURNING *"""
+        query = """INSERT INTO Links (title, link_url, created_at, created_by)
+               VALUES (:title, :link_url, NOW(), :created_by) RETURNING *"""
         return self.session.execute(query, {"title": link["title"],
-                                            "link_url": link["link_url"]}).fetchone()
+                                            "link_url": link["link_url"],
+                                            "created_by": link["created_by"]}
+                                    ).fetchone()
 
 
     def delete(self, link):
