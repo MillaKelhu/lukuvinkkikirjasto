@@ -10,3 +10,4 @@ CREATE TABLE Users (
     username TEXT UNIQUE,
     password TEXT
 );
+

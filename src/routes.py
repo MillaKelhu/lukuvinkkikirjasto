@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
-from db import configure_db
-from link_repository import LinkRepository
+from src.db import configure_db
+from src.link_repository import LinkRepository
 
 
 app = Flask(__name__)
