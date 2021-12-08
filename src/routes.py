@@ -25,7 +25,7 @@ def add_link():
 @app.route("/postlink", methods=["post"])
 def post_link():
     title = request.form["title"]
-    link_url = request.form["link_url"]
+    link_url = request.form["link_url"]     
     data = {"title":title,
             "link_url":link_url,
             "created_by": session["id"]}
@@ -33,9 +33,10 @@ def post_link():
     LINK_REPOSITORY.commit()
     return redirect("/")
 
-@app.route("/<int:link_id>")
+@app.route("/links/<int:link_id>")
 def show_link(link_id):
     data = LINK_REPOSITORY.find({"id":link_id})
+    return render_template("lukuvinkki.html", lukuvinkki=data)
 
 @app.route("/login")
 def login():
@@ -54,8 +55,12 @@ def handle_register():
         "username": request.form["username"],
         "password": hash.hexdigest()
     }
-    USER_REPOSITORY.create(data)
-    USER_REPOSITORY.commit()
+    try:
+        USER_REPOSITORY.create(data)
+        USER_REPOSITORY.commit()
+    except Exception:
+        return "Käyttäjänimi on jo käytössä"
+    print("testitäällä")
     return redirect("/")
 
 @app.route("/handlelogin", methods=["POST"])
@@ -65,11 +70,12 @@ def handle_login():
     users = USER_REPOSITORY.find_all()
     user = list(filter(lambda x: x.username==request.form["username"], users))
     if len(user)==0:
-        return "märrar"
+        return "Incorrect username or password"
     hash = user[0]["password"]
     if hash!=input_hash:
-        return "märrar"
+        return "Incorrect username or password"
     session['id']=user[0].id
+    print("testitäällä")
     return redirect("/")
 
 
