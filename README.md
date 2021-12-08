@@ -1,5 +1,5 @@
 # Lukuvinkkikirjasto
-Lukuvinkkikirjasto on web-sovellus, joka on toteutettu Flaskilla ja viety <a href=https://ryhma4ohtu2021miniproject.herokuapp.com/">Herokuun</a> käytettäväksi.
+Lukuvinkkikirjasto on web-sovellus, joka on toteutettu Flaskilla ja viety [Herokuun](https://ryhma4ohtu2021miniproject.herokuapp.com/) käytettäväksi.
 Sovellukseen voi tallentaa omia lukuvinkkejä sekä lisätä näihin kommentteja tai kuvauksia.
 Sovellukseen voi rekisteröityä ja kirjautua, mikä vaaditaan lukuvinkkien lisäämiseen, mutta kuka vain voi tarkastella lukuvinkkejä sivulla kirjautumatta.
 
@@ -12,7 +12,7 @@ Sovellukseen voi rekisteröityä ja kirjautua, mikä vaaditaan lukuvinkkien lis�
 - [ ] Käyttäjä pystyy poistaa omia lukuvinkkejään (vain omia)
 - [ ] Käyttäjä pystyy etsimään lukuvinkkejä esimerkiksi otsikon tai tagien perusteella
 - [ ] Käyttäjällä on oma sivu, josta näkee kyseisen käyttäjän omat lukuvinkit
-- [ ] Käyttäjä voi jakaa omat lukuvinkkinsä luettuihin/lukemattomiin
+- [ ] Käyttäjä voi jakaa omat lukuvinkkinsä luettuihin/lukemattomiin
 - [ ] Käyttäjä voi merkata lukuvinkkinsä luetuksi/lukemattomaksi
 - [ ] Käyttäjä pystyy muokkaamaan omia lukuvinkkejään
 - [ ] Lukuvinkkejä pystyy hakemaan lisäyspäivämäärän perusteella
