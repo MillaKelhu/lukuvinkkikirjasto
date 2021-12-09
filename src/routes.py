@@ -23,6 +23,8 @@ def index():
 
 @app.route("/addlink")
 def add_link():
+    if session["id"]==None:
+        return render_template("createLink.html", error_message="Sinun tulee kirjautua sisään ennen kuin voit lisätä lukuvinkkejä")
     return render_template("createLink.html")
 
 
