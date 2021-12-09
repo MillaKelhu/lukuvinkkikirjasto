@@ -59,9 +59,9 @@ def handle_register():
         USER_REPOSITORY.create(data)
         USER_REPOSITORY.commit()
     except Exception:
-        return "Käyttäjänimi on jo käytössä"
+        return render_template("register.html", "Käyttäjänimi on jo käytössä")
     print("testitäällä")
-    return redirect("/")
+    return redirect("/login")
 
 @app.route("/handlelogin", methods=["POST"])
 def handle_login():
@@ -70,10 +70,10 @@ def handle_login():
     users = USER_REPOSITORY.find_all()
     user = list(filter(lambda x: x.username==request.form["username"], users))
     if len(user)==0:
-        return "Incorrect username or password"
+        return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
     hash = user[0]["password"]
     if hash!=input_hash:
-        return "Incorrect username or password"
+        return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
     session['id']=user[0].id
     print("testitäällä")
     return redirect("/")
