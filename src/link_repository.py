@@ -33,7 +33,6 @@ class LinkRepository:
                                             "created_by": link["created_by"]}
                                     ).fetchone()
 
-
     def delete(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion id-kentän
         perusteella ja poista kyseinen rivi.
@@ -54,7 +53,7 @@ class LinkRepository:
                link_url = :link_url WHERE id = :id RETURNING *"""
         return self.session.execute(query, {"id": link["id"],
                                     "title": link["title"],
-                                    "link_url": link["link_url"]}).fetchone()
+                                            "link_url": link["link_url"]}).fetchone()
 
     def commit(self):
         """Kommitoi muutokset tietokantaan"""

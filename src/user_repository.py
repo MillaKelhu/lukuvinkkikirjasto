@@ -12,7 +12,7 @@ class UserRepository:
         query = "SELECT * FROM Users WHERE id = :id"
 
         return self.session.execute(query, {"id": user["id"]}).fetchone()
-        
+
     def find_all(self):
         """Hakeee kaikki käyttäjät tietokannasta ja palauttaa ne listana
         sqlalchemy.engine.RowProxy-olioita"""
@@ -52,7 +52,7 @@ class UserRepository:
                password = :password WHERE id = :id RETURNING *"""
         return self.session.execute(query, {"id": user["id"],
                                     "username": user["username"],
-                                    "password": user["password"]}).fetchone()
+                                            "password": user["password"]}).fetchone()
 
     def commit(self):
         """Kommitoi muutokset tietokantaan"""
