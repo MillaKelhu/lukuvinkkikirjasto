@@ -26,3 +26,7 @@ def post_link():
     LINK_REPOSITORY.create(data)
     LINK_REPOSITORY.commit()
     return redirect("/")
+
+@app.route("/<int:link_id>")
+def show_link(link_id):
+    data = LINK_REPOSITORY.find({"id":link_id})
