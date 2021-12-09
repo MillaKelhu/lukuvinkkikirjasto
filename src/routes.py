@@ -37,6 +37,11 @@ def post_link():
 def show_link(link_id):
     data = LINK_REPOSITORY.find({"id":link_id})
     return render_template("lukuvinkki.html", lukuvinkki=data)
+@app.route("/lukuvinkki_haku")
+def haku():
+    data = LINK_REPOSITORY.find_all()
+    data = filter(lambda x: request.args.get("search") in "{}{}".format(x.title, x.link_url), data)
+    return render_template("home.html", lukuvinkit=data)
 
 @app.route("/login")
 def login():
