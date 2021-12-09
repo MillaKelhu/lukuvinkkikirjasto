@@ -1,11 +1,13 @@
 {% extends "index.html" %}
-<!-- formi jossa title, link_url -->
+<!-- formi jossa title, 
+    link_url -->
 {% block content %}
+<title>lukuvinkikki</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
 <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
 <div class="home-container">
     <div class="links-container">
-        <h1>Lukuvinkit</h1> 
+        <h1>Lukuvinkidadat</h1> 
         <div class="link-card links-container-topbar">
             <h3>Nimi</h3>
             <h3>Osoite</h3>

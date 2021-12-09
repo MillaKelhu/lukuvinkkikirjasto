@@ -23,25 +23,32 @@ def index():
 
 @app.route("/addlink")
 def add_link():
+    if session["id"]==None:
+        return render_template("createLink.html", error_message="Sinun tulee kirjautua sisään ennen kuin voit lisätä lukuvinkkejä")
     return render_template("createLink.html")
 
 
 @app.route("/postlink", methods=["post"])
 def post_link():
     title = request.form["title"]
-    link_url = request.form["link_url"]
-    data = {"title": title,
-            "link_url": link_url,
+    link_url = request.form["link_url"]     
+    data = {"title":title,
+            "link_url":link_url,
             "created_by": session["id"]}
     LINK_REPOSITORY.create(data)
     LINK_REPOSITORY.commit()
     return redirect("/")
 
-
-@app.route("/<int:link_id>")
+@app.route("/links/<int:link_id>")
 def show_link(link_id):
-    data = LINK_REPOSITORY.find({"id": link_id})
+    data = LINK_REPOSITORY.find({"id":link_id})
+    return render_template("lukuvinkki.html", lukuvinkki=data)
+@app.route("/lukuvinkki_haku")
 
+def haku():
+    data = LINK_REPOSITORY.find_all()
+    data = filter(lambda x: request.args.get("search") in "{}{}".format(x.title, x.link_url), data)
+    return render_template("home.html", lukuvinkit=data)
 
 @app.route("/login")
 def login():
@@ -64,9 +71,13 @@ def handle_register():
         "username": request.form["username"],
         "password": hash.hexdigest()
     }
-    USER_REPOSITORY.create(data)
-    USER_REPOSITORY.commit()
-    return redirect("/")
+    try:
+        USER_REPOSITORY.create(data)
+        USER_REPOSITORY.commit()
+    except Exception:
+        return render_template("register.html", "Käyttäjänimi on jo käytössä")
+    print("testitäällä")
+    return redirect("/login")
 
 
 @app.route("/handlelogin", methods=["POST"])
@@ -75,12 +86,13 @@ def handle_login():
         "joiafhoufheoa3ijfla3dfnuneugyugeoj830803"
     input_hash = hashlib.sha256(input_password.encode()).hexdigest()
     users = USER_REPOSITORY.find_all()
-    user = list(filter(lambda x: x.username ==
-                request.form["username"], users))
-    if len(user) == 0:
-        return "märrar"
+    user = list(filter(lambda x: x.username==request.form["username"], users))
+
+    if len(user)==0:
+        return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
     hash = user[0]["password"]
-    if hash != input_hash:
-        return "märrar"
-    session['id'] = user[0].id
+    if hash!=input_hash:
+        return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
+    session['id']=user[0].id
+    print("testitäällä")
     return redirect("/")

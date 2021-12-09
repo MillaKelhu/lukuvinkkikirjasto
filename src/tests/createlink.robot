@@ -9,8 +9,10 @@ Open Link Form Page
     Add Link Page Should Be Open
 
 Add Link Correctly
+    Authenticate
+    Go To Add Link Page
     Set Title  Wikipedia
-    Set Url  wikipedia.com
+    Set Url  testilinkki
     Submit Link
     Page Should Contain  Wikipedia
 
