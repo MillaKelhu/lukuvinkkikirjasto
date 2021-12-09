@@ -1,6 +1,6 @@
 <b>Sprint 2 Burndown</b>
 
-![Sprint 2 Burndown](https://user-images.githubusercontent.com/72990467/145381271-c55c39ab-f353-4ad9-aafc-d266464cea4e.jpg)
+![Sprint2_burndown](https://user-images.githubusercontent.com/72990467/145403858-71e41d09-aeb3-4e99-84bf-18ea15572616.jpg)
 
 <b>Sprint 1 Burndown</b>
 
