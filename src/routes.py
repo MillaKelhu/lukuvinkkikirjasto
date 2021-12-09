@@ -75,7 +75,7 @@ def handle_register():
         USER_REPOSITORY.create(data)
         USER_REPOSITORY.commit()
     except Exception:
-        return render_template("register.html", "Käyttäjänimi on jo käytössä")
+        return render_template("register.html", error_message="Käyttäjänimi on jo käytössä")
     print("testitäällä")
     return redirect("/login")
 
