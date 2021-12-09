@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/lukuvinkki.css') }}">
+<div class="lukuvinkki-container">
+    <h2 class="lukuvinkki-title">{{lukuvinkki.title}}</h2>
+    <a class="avaa-lukuvinkki-link" href={{lukuvinkki.link_url}}>
+        <button class="link-button">Avaa Lukuvinkki</button>
+    </a>
+</div>  
+
+{% endblock %}
+
+
+
+
+

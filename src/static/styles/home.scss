@@ -1,0 +1,66 @@
+.home-container {
+    margin: 50px;
+}
+.links-container {
+    margin: 0px auto;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+.link-card {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    h3:nth-child(1) {
+        width: 200px;
+        margin-left: 5px;
+    }
+    .link-url {
+        text-decoration: underline;
+        display: block;
+        overflow: hidden;
+        width: 350px;
+
+    }
+    .link-card-button {
+        margin-left: auto;
+        margin-right: 15px;
+    }
+    button {
+        font-size: 16px;
+        border: none;
+        color: white;
+        background-color: rgb(0, 107, 0);
+        cursor: pointer;
+        width: 80px;
+        height: 30px;
+        &:hover {
+            background-color: lighten(rgb(0, 107, 0), 10%);
+        }
+    }
+}
+.links-container-topbar {
+    color: white;
+    background-color: rgb(0, 89, 255);
+}
+.lukuvinkki-haku {
+    color: white;
+    font-size: 16px;
+    background-color: transparent;
+    height: 60%;
+    border: none;
+    border-bottom: 2px solid white;
+    margin-right: 50px;
+    margin-left: auto;
+    &:focus {
+        outline: none;
+    }
+}
+.search-button {
+    width: 100px;
+    height: 40px;
+}
+form {
+    margin-left: auto;
+}

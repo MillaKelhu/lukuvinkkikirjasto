@@ -12,7 +12,7 @@ Add Link Correctly
     Set Title  Wikipedia
     Set Url  wikipedia.com
     Submit Link
-    Page Should Contain  Lukuvinkit
+    Page Should Contain  Wikipedia
 
 *** Keywords ***
 Set Title

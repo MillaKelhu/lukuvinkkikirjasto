@@ -5,7 +5,7 @@ Library  ../AppLibrary.py
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  chrome
-${DELAY}  0 seconds
+${DELAY}  0.5 seconds
 ${HOME URL}  http://localhost:5000
 ${ADDLINK URL}  http://localhost:5000/addlink
 
