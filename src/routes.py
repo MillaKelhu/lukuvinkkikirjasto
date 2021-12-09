@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, session
 
-from src.db import configure_db
-from src.link_repository import LinkRepository
-from src.user_repository import UserRepository
+from db import configure_db
+from link_repository import LinkRepository
+from user_repository import UserRepository
 import hashlib
 import os
 
