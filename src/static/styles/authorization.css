@@ -1,0 +1,22 @@
+a {
+  text-decoration: underline;
+  color: blue;
+}
+
+.authorization-container {
+  margin: 50px;
+}
+
+.authorization-button {
+  border: none;
+  cursor: pointer;
+  width: 120px;
+  height: 40px;
+  font-size: 14px;
+  background-color: #006b00;
+}
+
+.authorization-button:hover {
+  background-color: #009e00;
+}
+/*# sourceMappingURL=authorization.css.map */

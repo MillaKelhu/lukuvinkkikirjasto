@@ -1,0 +1,20 @@
+a {
+    text-decoration: underline;
+    color: blue;
+}
+
+
+.authorization-container {
+    margin: 50px;
+}
+.authorization-button {
+    border: none;
+    cursor: pointer;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    background-color: rgb(0, 107, 0);
+    &:hover {
+        background-color: lighten(rgb(0, 107, 0), 10%)
+    }
+}

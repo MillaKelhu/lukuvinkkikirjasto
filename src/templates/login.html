@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block content %}
+<script src="{{ url_for('static', filename='scripts/login.js') }}"></script>
+<div class="authorization-container login-container" id="login-container">
+    <h1>Kirjaudu sisään</h1>
+    <form action="/handlelogin" method="POST">
+        <div id="login-input-container"></div>
+        <button class="authorization-button" type="submit">Kirjaudu sisään</button>
+    </form>
+    <p>Eikö sinulla ole käyttäjää? Luo uusi käyttäjä <a href="/register">tästä</a>
+</div>
+{% endblock %}
+
+

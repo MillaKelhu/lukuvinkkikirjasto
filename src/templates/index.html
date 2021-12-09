@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Lukuvinkit</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/authorization.css') }}">
+    <script src="{{ url_for('static', filename='scripts/link_generator.js') }}"></script>
 </head>
 
 <body>
@@ -11,6 +13,7 @@
         <div class="topbar-buttons-container">
             <a href="/"><button>Lukuvinkkikirjasto</button></a>
             <a href="/addlink"><button class="">Lisää Lukuvinkki</button></a>
+            <a href="/login"><button class="">Kirjaudu sisään</button></a>
         </div>
     </div>
     {% block content %}

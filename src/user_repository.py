@@ -12,7 +12,7 @@ class UserRepository:
         query = "SELECT * FROM Users WHERE id = :id"
 
         return self.session.execute(query, {"id": user["id"]}).fetchone()
-
+        
     def find_all(self):
         """Hakeee kaikki käyttäjät tietokannasta ja palauttaa ne listana
         sqlalchemy.engine.RowProxy-olioita"""
