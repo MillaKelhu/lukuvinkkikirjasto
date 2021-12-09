@@ -5,15 +5,15 @@ Sovellukseen voi rekisteröityä ja kirjautua, mikä vaaditaan lukuvinkkien lis�
 
 # Ominaisuudet (ruksitut ovat valmiina)
 
-- [x] Web-sovellukseen voi lisätä lukuvinkkejä (tällä hetkellä ei tarvitse käyttäjää)
+- [x] Web-sovellukseen voi lisätä lukuvinkkejä (tarvitsee olla kirjautuneena)
 - [x] Web-sovellus näyttää etusivulla lisätyt lukuvinkit
-- [ ] Web-sovellukseen voi rekisteröityä ja kirjautua
+- [x] Web-sovellukseen voi rekisteröityä ja kirjautua
 - [ ] Lukuvinkeille on jokaiselle oma sivu, josta näkee otsikon, lisäyspäivämäärän, lisääjän kommentit tai antaman kuvauksen sekä linkki tai esimerkiksi vinkin ISBN, jos se on kirja
 - [ ] Käyttäjä pystyy poistaa omia lukuvinkkejään (vain omia)
 - [ ] Käyttäjä pystyy etsimään lukuvinkkejä esimerkiksi otsikon tai tagien perusteella
 - [ ] Käyttäjällä on oma sivu, josta näkee kyseisen käyttäjän omat lukuvinkit
 - [ ] Käyttäjä voi jakaa omat lukuvinkkinsä luettuihin/lukemattomiin
-- [ ] Käyttäjä voi merkata lukuvinkkinsä luetuksi/lukemattomaksi
+- [ ] Käyttäjä voi merkata lukuvinkkinsä luetuksi/lukemattomaksi
 - [ ] Käyttäjä pystyy muokkaamaan omia lukuvinkkejään
 - [ ] Lukuvinkkejä pystyy hakemaan lisäyspäivämäärän perusteella
 

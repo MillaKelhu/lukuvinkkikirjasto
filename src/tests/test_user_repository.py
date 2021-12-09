@@ -3,6 +3,7 @@ from user_repository import UserRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
         engine = create_engine(f"postgresql+psycopg2://localhost/")

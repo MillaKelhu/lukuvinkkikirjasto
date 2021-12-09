@@ -4,6 +4,7 @@ import os
 
 load_dotenv(find_dotenv())
 
+
 def configure_db(app):
     # uri = os.environ.get("DATABASE_URL")
     # if uri.startswith("postgres://"):
