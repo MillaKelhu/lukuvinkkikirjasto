@@ -13,7 +13,7 @@ Sovellukseen voi rekisteröityä ja kirjautua, mikä vaaditaan lukuvinkkien lis�
 - [ ] Käyttäjä pystyy etsimään lukuvinkkejä esimerkiksi otsikon tai tagien perusteella
 - [ ] Käyttäjällä on oma sivu, josta näkee kyseisen käyttäjän omat lukuvinkit
 - [ ] Käyttäjä voi jakaa omat lukuvinkkinsä luettuihin/lukemattomiin
-- [ ] Käyttäjä voi merkata lukuvinkkinsä luetuksi/lukemattomaksi
+- [ ] Käyttäjä voi merkata lukuvinkkinsä luetuksi/lukemattomaksi
 - [ ] Käyttäjä pystyy muokkaamaan omia lukuvinkkejään
 - [ ] Lukuvinkkejä pystyy hakemaan lisäyspäivämäärän perusteella
 
