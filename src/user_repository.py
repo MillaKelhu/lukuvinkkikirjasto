@@ -52,7 +52,8 @@ class UserRepository:
                password = :password WHERE id = :id RETURNING *"""
         return self.session.execute(query, {"id": user["id"],
                                     "username": user["username"],
-                                            "password": user["password"]}).fetchone()
+                                    "password": user["password"]}
+                                    ).fetchone()
 
     def commit(self):
         """Kommitoi muutokset tietokantaan"""

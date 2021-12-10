@@ -4,10 +4,11 @@ from link_repository import LinkRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 class TestLinkRepository(unittest.TestCase):
     def setUp(self):
-        engine = create_engine(f"postgresql+psycopg2://localhost")
+        dirname = os.path.dirname(__file__)
+        dbpath = os.path.join(dirname, "test.db")
+        engine = create_engine(f"sqlite:///{dbpath}")
         Session = sessionmaker()
         Session.configure(bind=engine)
         session = Session()

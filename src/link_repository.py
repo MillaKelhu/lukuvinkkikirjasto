@@ -27,7 +27,7 @@ class LinkRepository:
         muutosten tallentamiseksi"""
 
         query = """INSERT INTO Links (title, link_url, created_at, created_by)
-               VALUES (:title, :link_url, NOW(), :created_by) RETURNING *"""
+               VALUES (:title, :link_url, datetime('now'), :created_by) RETURNING *"""
         return self.session.execute(query, {"title": link["title"],
                                             "link_url": link["link_url"],
                                             "created_by": link["created_by"]}
@@ -53,7 +53,8 @@ class LinkRepository:
                link_url = :link_url WHERE id = :id RETURNING *"""
         return self.session.execute(query, {"id": link["id"],
                                     "title": link["title"],
-                                            "link_url": link["link_url"]}).fetchone()
+                                    "link_url": link["link_url"]}
+                                    ).fetchone()
 
     def commit(self):
         """Kommitoi muutokset tietokantaan"""

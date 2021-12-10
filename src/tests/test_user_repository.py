@@ -1,12 +1,14 @@
+import os
 import unittest
 from user_repository import UserRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
-        engine = create_engine(f"postgresql+psycopg2://localhost/")
+        dirname = os.path.dirname(__file__)
+        dbpath = os.path.join(dirname, "test.db")
+        engine = create_engine(f"sqlite:///{dbpath}")
         Session = sessionmaker()
         Session.configure(bind=engine)
         session = Session()
@@ -23,8 +25,7 @@ class TestUserRepository(unittest.TestCase):
 
     def test_create(self):
         user = {"username": "user_two",
-                "password": "another_good_password"
-                }
+                "password": "another_good_password"}
 
         self.user_repository.create(user)
         result = self.user_repository.find_all()
@@ -34,8 +35,7 @@ class TestUserRepository(unittest.TestCase):
 
     def test_delete(self):
         user = {"username": "user_two",
-                "password": "another_good_password"
-                }
+                "password": "another_good_password"}
 
         self.user_repository.create(user)
 
@@ -52,8 +52,7 @@ class TestUserRepository(unittest.TestCase):
     def test_update(self):
         user = {"id": 1,
                 "username": "user_one",
-                "password": "better_password"
-                }
+                "password": "better_password"}
 
         result = self.user_repository.find(user)
 
