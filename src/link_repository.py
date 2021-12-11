@@ -14,24 +14,24 @@ class LinkRepository:
         return self.session.execute(query, {"id": link["id"]}).fetchone()
 
     def find_all(self):
-        """Hakeee kaikki linkit tietokannasta ja palauttaa ne listana
+        """Hakee kaikki linkit tietokannasta ja palauttaa ne listana
         sqlalchemy.engine.RowProxy-olioita"""
 
         return self.session.execute("SELECT * FROM Links").fetchall()
 
     def create(self, link):
         """Luo linkki tietokantaan Pythonin dictionary-olion title- ja
-        link_url-kentistä. Palauttaa luodun rivin
-        sqlalchemy.engine.RowProxy-oliona.
+        link_url-kentistä.
         Huom. Metodin kutsujan vastuulla on kutsua commit-metodia
         muutosten tallentamiseksi"""
 
         query = """INSERT INTO Links (title, link_url, created_at, created_by)
-               VALUES (:title, :link_url, datetime('now'), :created_by) RETURNING *"""
-        return self.session.execute(query, {"title": link["title"],
-                                            "link_url": link["link_url"],
-                                            "created_by": link["created_by"]}
-                                    ).fetchone()
+               VALUES (:title, :link_url, datetime('now'), :created_by)"""
+        self.session.execute(query, {"title": link["title"],
+                                     "link_url": link["link_url"],
+                                     "created_by": link["created_by"]}
+                             )
+
 
     def delete(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion id-kentän
@@ -45,16 +45,16 @@ class LinkRepository:
     def update(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion
         id-kentän perusteella ja päivitä sen title- ja
-        link_url-kentät. Palauttaa muokatun rivin
-        sqlalchemy.engine.RowProxy-oliona. Huom. Metodin kutsujan
+        link_url-kentät.
+        Huom. Metodin kutsujan
         vastuulla on kutsua commit-metodia muutosten tallentamiseksi"""
 
         query = """UPDATE Links SET title = :title,
-               link_url = :link_url WHERE id = :id RETURNING *"""
+               link_url = :link_url WHERE id = :id"""
         return self.session.execute(query, {"id": link["id"],
                                     "title": link["title"],
                                     "link_url": link["link_url"]}
-                                    ).fetchone()
+                                    )
 
     def commit(self):
         """Kommitoi muutokset tietokantaan"""

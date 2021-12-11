@@ -21,16 +21,14 @@ class UserRepository:
 
     def create(self, user):
         """Luo käyttäjä tietokantaan Pythonin dictionary-olion username- ja
-        password-kentistä. Palauttaa luodun rivin
-        sqlalchemy.engine.RowProxy-oliona.
+        password-kentistä.
         Huom. Metodin kutsujan vastuulla on kutsua commit-metodia
         muutosten tallentamiseksi"""
 
         query = """INSERT INTO Users (username, password)
-               VALUES (:username, :password) RETURNING *"""
-        return self.session.execute(query, {"username": user["username"],
-                                            "password": user["password"]}
-                                    ).fetchone()
+               VALUES (:username, :password)"""
+        self.session.execute(query, {"username": user["username"],
+                                     "password": user["password"]})
 
     def delete(self, user):
         """Hae käyttäjä tietokannasta Pythonin dictionary-olion id-kentän
@@ -44,16 +42,15 @@ class UserRepository:
     def update(self, user):
         """Hae käyttäjä tietokannasta Pythonin dictionary-olion
         id-kentän perusteella ja päivitä sen username- ja
-        password-kentät. Palauttaa muokatun rivin
-        sqlalchemy.engine.RowProxy-oliona. Huom. Metodin kutsujan
+        password-kentät.
+        Huom. Metodin kutsujan
         vastuulla on kutsua commit-metodia muutosten tallentamiseksi"""
 
         query = """UPDATE Users SET username = :username,
-               password = :password WHERE id = :id RETURNING *"""
-        return self.session.execute(query, {"id": user["id"],
-                                    "username": user["username"],
-                                    "password": user["password"]}
-                                    ).fetchone()
+               password = :password WHERE id = :id"""
+        self.session.execute(query, {"id": user["id"],
+                                     "username": user["username"],
+                                     "password": user["password"]})
 
     def commit(self):
         """Kommitoi muutokset tietokantaan"""

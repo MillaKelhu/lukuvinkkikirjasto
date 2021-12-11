@@ -53,7 +53,9 @@ class TestLinkRepository(unittest.TestCase):
 
         self.assertEqual(result[1], "Spark")
 
-        result = self.link_repository.update(link)
+        self.link_repository.update(link)
+
+        result = self.link_repository.find(link)
 
         self.assertEqual(result[1], "Apache Spark")
 

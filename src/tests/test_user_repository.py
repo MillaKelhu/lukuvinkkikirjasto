@@ -58,7 +58,9 @@ class TestUserRepository(unittest.TestCase):
 
         self.assertEqual(result["password"], "good_password")
 
-        result = self.user_repository.update(user)
+        self.user_repository.update(user)
+
+        result = self.user_repository.find(user)
 
         self.assertEqual(result["password"], "better_password")
 
