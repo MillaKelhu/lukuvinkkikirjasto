@@ -13,7 +13,11 @@
         <div class="topbar-buttons-container">
             <a href="/"><button>Lukuvinkkikirjasto</button></a>
             <a href="/addlink"><button class="">Lisää Lukuvinkki</button></a>
+            {% if session.username %}
+            <a href="/logout"><button class="">Kirjaudu ulos</button></a>
+            {% else %}
             <a href="/login"><button class="">Kirjaudu sisään</button></a>
+            {% endif %}
         </div>
     </div>
     {% block content %}
