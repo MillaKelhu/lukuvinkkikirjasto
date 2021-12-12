@@ -99,8 +99,5 @@ def handle_login():
 
 @app.route("/logout")
 def logout():
-    endSession()
+    del session['id']
     return redirect("/")
-
-def endSession():
-    del sessio['id']
