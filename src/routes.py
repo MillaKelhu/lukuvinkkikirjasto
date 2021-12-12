@@ -96,3 +96,11 @@ def handle_login():
     session['id']=user[0].id
     print("testitäällä")
     return redirect("/")
+
+@app.route("/logout")
+def logout():
+    endSession()
+    return redirect("/")
+
+def endSession():
+    del sessio['id']
