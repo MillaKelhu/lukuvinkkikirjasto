@@ -1,3 +1,6 @@
+from werkzeug.security import check_password_hash, generate_password_hash
+from os import X_OK
+
 class UserRepository:
     def __init__(self, session):
         """Konstruktoi sqlalchemy-sessiosta linkki-repositorion"""
@@ -9,7 +12,7 @@ class UserRepository:
         perusteella ja palauttaa kyseisen rivin
         sqlalchemy.engine.RowProxy-oliona"""
 
-        query = "SELECT * FROM Users WHERE id = :id"
+        query = "SELECT * FROM  Users WHERE id = :id"
 
         return self.session.execute(query, {"id": user["id"]}).fetchone()
 
@@ -61,3 +64,39 @@ class UserRepository:
         """Peruuta muutokset tietokantaan"""
 
         self.session.rollback()
+
+    def login(self,user):
+        """Hakee käyttäjän tietokannasta Pythonin dictionary-olion
+        user perusteella, jolla on kentät username ja password.
+        Metodi tarkistaa mikäli käyttäjä on olemassa ja onko
+        annettu salasana oikea. Palauttaa käyttäjän tiedot
+        sqlalchemy.engine.RowProxy-oliona, mikäli käyttäjää
+        ei ole palauttaa virheilmoituksen."""
+
+        query = """SELECT * FROM Users WHERE username=:username"""
+        result = self.session.execute(query, {"username":user["username"]}).fetchone()
+        
+        if result == None:
+            raise Exception
+        if check_password_hash(result["password"],user["password"]) == False:
+            raise Exception
+        return result
+        
+
+    def register(self,user):
+        """Metodi, joka vastaanottaa Pythonin dictionary-olion,
+        jolla on kentät username ja password. Metodi tarkastaa
+        onko käyttäjänimi jo käytössä, jos ei ole se kutsuu
+        metodia create hashattyään salasanan, jonka jälkeen
+        committaa muutoksen tietokantaan. Mikäli käyttäjänimi
+        on käytössä metodi palauttaa False."""
+
+        new_user = {"username":user["username"],
+                    "password":generate_password_hash(user["password"])}
+
+        try:
+            self.create(new_user)
+            self.commit()
+            return True
+        except Exception:
+            return False

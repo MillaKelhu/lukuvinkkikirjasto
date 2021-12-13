@@ -7,16 +7,21 @@ from sqlalchemy.orm import sessionmaker
 class TestLinkRepository(unittest.TestCase):
     def setUp(self):
         dirname = os.path.dirname(__file__)
+        self.dirname = dirname
         dbpath = os.path.join(dirname, "test.db")
-        engine = create_engine(f"sqlite:///{dbpath}")
+        self.dbpath = dbpath
+        schema_path = os.path.join(dirname, "test_schema.sql")
+        os.system(f"sqlite3 {dbpath} < {schema_path}")
+        self.engine = create_engine(f"sqlite:///{dbpath}")
         Session = sessionmaker()
-        Session.configure(bind=engine)
+        Session.configure(bind=self.engine)
         session = Session()
 
         self.link_repository = LinkRepository(session)
 
     def tearDown(self):
-        pass
+        self.engine.dispose()
+        os.system(f"rm {self.dbpath}")
 
     def test_find_all(self):
         result = self.link_repository.find_all()
