@@ -84,4 +84,11 @@ def handle_login():
     except Exception:
         return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
     session["id"] = user["id"]
+    session["username"]=user["username"]
+    return redirect("/")
+
+@app.route("/handlelogout")
+def handle_logout():
+    del session["id"]
+    del session["username"]
     return redirect("/")
