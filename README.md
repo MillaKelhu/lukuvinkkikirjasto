@@ -1,3 +1,5 @@
+![GitHub Actions](https://github.com/MillaKelhu/lukuvinkkikirjasto/workflows/CI/badge.svg)
+
 # Lukuvinkkikirjasto
 Lukuvinkkikirjasto on web-sovellus, joka on toteutettu Flaskilla ja viety [Herokuun](https://ryhma4ohtu2021miniproject.herokuapp.com/) käytettäväksi.
 Sovellukseen voi tallentaa omia lukuvinkkejä sekä lisätä näihin kommentteja tai kuvauksia.
