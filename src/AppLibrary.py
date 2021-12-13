@@ -1,9 +1,11 @@
-from routes import USER_REPOSITORY, session
+from routes import USER_REPOSITORY
+from routes import LINK_REPOSITORY
 
 class AppLibrary:
     def __init__(self):
         self._base_url = "http://localhost:5000"
         self.USER_REPOSITORY = USER_REPOSITORY
+        self.LINK_REPOSITORY = LINK_REPOSITORY
 
     def create_user(self, username, password):
         self.USER_REPOSITORY.create({"username": username, "password": password})
@@ -12,3 +14,7 @@ class AppLibrary:
     def reset_adding_user(self, username, password):
         self.USER_REPOSITORY.delete_by_username_and_password({"username": username, "password": password})
         self.USER_REPOSITORY.commit()
+
+    def reset_adding_link(self, title, url):
+        self.LINK_REPOSITORY.delete_by_title_and_url({"title": title, "link_url": url})
+        self.LINK_REPOSITORY.commit()
