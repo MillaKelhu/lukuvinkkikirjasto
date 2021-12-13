@@ -67,12 +67,23 @@ def register():
 def handle_register():
     input_password = request.form["password"]
     input_username = request.form["username"]
-    state = USER_REPOSITORY.register({"username":input_username,
-                            "password":input_password})
-    
-    if not state:
+    state = USER_REPOSITORY.register(
+        {
+        "username":input_username,
+        "password":input_password
+        })
+    USER_REPOSITORY.commit()
+    try:
+        user = USER_REPOSITORY.login(
+            {
+                "username":input_username,
+                "password":input_password
+            })
+        session["id"] = user["id"]
+        session["username"]=user["username"]
+    except Exception:
         return render_template("register.html", error_message="Käyttäjänimi on jo käytössä")
-    return redirect("/login")
+    return redirect("/")
 
 
 @app.route("/handlelogin", methods=["POST"])
@@ -94,8 +105,7 @@ def handle_login():
 
 @app.route("/handlelogout")
 def handle_logout():
-    del session["id"]
-    del session["username"]
+    session.clear()
     return redirect("/")
 
 @app.delete("/links/<link_id>")
