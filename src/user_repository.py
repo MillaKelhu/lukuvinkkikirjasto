@@ -1,4 +1,4 @@
-import hashlib
+from werkzeug.security import check_password_hash, generate_password_hash
 from os import X_OK
 
 class UserRepository:
@@ -12,7 +12,7 @@ class UserRepository:
         perusteella ja palauttaa kyseisen rivin
         sqlalchemy.engine.RowProxy-oliona"""
 
-        query = "SELECT * FROM Users WHERE id = :id"
+        query = "SELECT * FROM  Users WHERE id = :id"
 
         return self.session.execute(query, {"id": user["id"]}).fetchone()
 
@@ -76,12 +76,11 @@ class UserRepository:
         query = """SELECT * FROM Users WHERE username=:username"""
         result = self.session.execute(query, {"username":user["username"]}).fetchone()
         
-        #if result == None:
-        #    pass
-            #raise Exception
-        if self.check_password_hash(user["password"],result["password"]):
-            return result
-            #raise Exception
+        if result == None:
+            raise Exception
+        if check_password_hash(result["password"],user["password"]) == False:
+            raise Exception
+        return result
         
 
     def register(self,user):
@@ -92,25 +91,12 @@ class UserRepository:
         committaa muutoksen tietokantaan. Mikäli käyttäjänimi
         on käytössä metodi palauttaa False."""
 
-        salted_password = user["password"] + \
-            "joiafhoufheoa3ijfla3dfnuneugyugeoj830803"
-        hashed_password = hashlib.sha256(salted_password.encode()).hexdigest()
-        user["password"] = hashed_password
+        new_user = {"username":user["username"],
+                    "password":generate_password_hash(user["password"])}
 
         try:
-            self.create(user)
+            self.create(new_user)
             self.commit()
             return True
         except Exception:
             return False
-
-    def check_password_hash(self,input_password,db_password):
-        """Metodi tarkastaa vastaako annettu salasana 
-        tietokannassa olevaa salasanaa"""
-
-        input_password += "joiafhoufheoa3ijfla3dfnuneugyugeoj830803"
-        input_password = hashlib.sha256(input_password.encode()).hexdigest()
-        if input_password == db_password:
-            return True
-        return False
-

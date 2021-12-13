@@ -100,7 +100,6 @@ class TestUserRepository(unittest.TestCase):
 
         self.user_repository.register(user)
         result = self.user_repository.login(user)
-        print(type(result))
 
         self.assertEqual(user["username"],result["username"])
 
@@ -115,9 +114,7 @@ class TestUserRepository(unittest.TestCase):
         with self.assertRaises(Exception):
             result = self.user_repository.login(user2)
 
-    def test_check_password_hash(self):
-        pass1 = "sbrölölöö"
-        pass2 = "sbrölölööjoiafhoufheoa3ijfla3dfnuneugyugeoj830803"
-        pass2 = hashlib.sha256(pass2.encode()).hexdigest()
-        state = self.user_repository.check_password_hash(pass1,pass1)
-        self.assertEqual(state,True)
+    def test_login_with_nonexistent_user(self):
+        with self.assertRaises(Exception):
+            self.user_repository.login({"username":"käyttis",
+                                        "password":"salis"})
