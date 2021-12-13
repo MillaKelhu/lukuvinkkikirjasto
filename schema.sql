@@ -5,7 +5,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Links (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     title TEXT,
     link_url TEXT,
     created_at TIMESTAMP,

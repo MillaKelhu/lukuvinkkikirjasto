@@ -42,14 +42,11 @@ Login Page Should Be Open
     Page Should Contain  Eikö sinulla ole käyttäjää? Luo uusi käyttäjä
 
 Authenticate
-    Go To Register Page
-    Set Username  testiuser
-    Set Password  12345
-    Click Button  Luo
+    Create User  testiuser  12345
     Go To Login Page
     Set Username  testiuser
     Set Password  12345
-    Click Button  Kirjaudu sisään
+    Click Button  login button
 
 Set Username
     [Arguments]  ${title}

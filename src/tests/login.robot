@@ -1,7 +1,7 @@
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
-Suite Teardown  Reset Added Users And Close Browser
+Suite Teardown  Reset Added User And Close Browser
 Test Setup  Create User For Tests And Go To Login Page
 *** Test Cases ***
 
@@ -39,6 +39,6 @@ Create User For Tests And Go To Login Page
     Go To Login Page
     Login Page Should Be Open
 
-Reset Added Users And Close Browser
+Reset Added User And Close Browser
     Reset Adding User  testiuser  123456
     Close Browser
