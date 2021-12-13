@@ -31,7 +31,7 @@ def add_link():
 @app.route("/postlink", methods=["post"])
 def post_link():
     title = request.form["title"]
-    link_url = request.form["link_url"]     
+    link_url = request.form["link_url"]
     data = {"title":title,
             "link_url":link_url,
             "created_by": session["id"]}
@@ -101,4 +101,5 @@ def handle_login():
 @app.route("/logout")
 def logout():
     del session['id']
+    del session['username']
     return redirect("/")
