@@ -7,3 +7,4 @@ class AppLibrary:
 
     def reset_adding_user(self, username, password):
         self.USER_REPOSITORY.delete_by_username_and_password({"username": username, "password": password})
+        self.USER_REPOSITORY.commit()
