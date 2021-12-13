@@ -1,5 +1,4 @@
 from werkzeug.security import check_password_hash, generate_password_hash
-from os import X_OK
 
 class UserRepository:
     def __init__(self, session):
@@ -75,13 +74,13 @@ class UserRepository:
 
         query = """SELECT * FROM Users WHERE username=:username"""
         result = self.session.execute(query, {"username":user["username"]}).fetchone()
-        
-        if result == None:
+
+        if result is None:
             raise Exception
-        if check_password_hash(result["password"],user["password"]) == False:
+        if not check_password_hash(result["password"],user["password"]):
             raise Exception
         return result
-        
+
 
     def register(self,user):
         """Metodi, joka vastaanottaa Pythonin dictionary-olion,

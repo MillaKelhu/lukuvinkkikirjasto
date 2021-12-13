@@ -1,6 +1,6 @@
+import os
 from dotenv import load_dotenv, find_dotenv
 from flask_sqlalchemy import SQLAlchemy
-import os
 
 load_dotenv(find_dotenv())
 
