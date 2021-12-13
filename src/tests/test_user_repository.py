@@ -71,3 +71,39 @@ class TestUserRepository(unittest.TestCase):
         result = self.user_repository.find(user)
 
         self.assertEqual(result[1], "user_one")
+
+    def test_register(self):
+        user = {"username":"user",
+                "password":"pass"}
+
+        value = self.user_repository.register(user)
+
+        self.assertEqual(True,value)
+
+    def test_register_fails_when_username_in_use(self):
+        user = {"username":"user",
+                "password":"pass"}
+
+        self.user_repository.register(user)
+        value = self.user_repository.register(user)
+
+        self.assertEqual(False,value)
+
+    def test_login(self):
+        user = {"username":"user",
+                "password":"pass"}
+
+        self.user_repository.register(user)
+        result = self.user_repository.login(user)
+
+        self.assertEqual(user["username"],result["username"])
+
+    def test_login_with_incorrect_password(self):
+        user = {"username":"user",
+                "password":"pass"}
+
+        self.user_repository.register(user)
+        user["password"] = "sbrölölöö"
+
+        result = self.user_repository.login(user)
+        self.assertNotEqual(result["username",user["username"]])

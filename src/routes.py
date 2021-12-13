@@ -3,8 +3,7 @@ from flask import Flask, render_template, request, redirect, session
 from db import configure_db
 from link_repository import LinkRepository
 from user_repository import UserRepository
-import hashlib
-import os
+import os, hashlib
 
 app = Flask(__name__)
 db = configure_db(app)
@@ -23,7 +22,7 @@ def index():
 
 @app.route("/addlink")
 def add_link():
-    if session["id"]==None:
+    if "id" not in session:
         return render_template("createLink.html", error_message="Sinun tulee kirjautua sisään ennen kuin voit lisätä lukuvinkkejä")
     return render_template("createLink.html")
 
@@ -64,35 +63,24 @@ def register():
 
 @app.route("/handleregister", methods=["POST"])
 def handle_register():
-    salted_password = request.form["password"] + \
-        "joiafhoufheoa3ijfla3dfnuneugyugeoj830803"
-    hash = hashlib.sha256(salted_password.encode())
-    data = {
-        "username": request.form["username"],
-        "password": hash.hexdigest()
-    }
-    try:
-        USER_REPOSITORY.create(data)
-        USER_REPOSITORY.commit()
-    except Exception:
+    input_password = request.form["password"]
+    input_username = request.form["username"]
+    state = USER_REPOSITORY.register({"username":input_username,
+                            "password":input_password})
+    
+    if not state:
         return render_template("register.html", error_message="Käyttäjänimi on jo käytössä")
-    print("testitäällä")
     return redirect("/login")
 
 
 @app.route("/handlelogin", methods=["POST"])
 def handle_login():
-    input_password = request.form["password"] + \
-        "joiafhoufheoa3ijfla3dfnuneugyugeoj830803"
-    input_hash = hashlib.sha256(input_password.encode()).hexdigest()
-    users = USER_REPOSITORY.find_all()
-    user = list(filter(lambda x: x.username==request.form["username"], users))
-
-    if len(user)==0:
-        return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
-    hash = user[0]["password"]
-    if hash!=input_hash:
-        return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
-    session['id']=user[0].id
-    print("testitäällä")
+    input_password = request.form["password"]
+    input_username = request.form["username"]
+    user = USER_REPOSITORY.login({"username":input_username,
+                                "password":input_password})
+    
+    if type(user) == str:
+        return render_template("login.html", error_message=user)
+    session["id"] = user["id"]
     return redirect("/")
