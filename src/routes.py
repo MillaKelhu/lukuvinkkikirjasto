@@ -1,9 +1,10 @@
+import os
 from flask import Flask, render_template, request, redirect, session
 
 from db import configure_db
 from link_repository import LinkRepository
 from user_repository import UserRepository
-import os, hashlib
+
 
 app = Flask(__name__)
 db = configure_db(app)
@@ -23,14 +24,15 @@ def index():
 @app.route("/addlink")
 def add_link():
     if "id" not in session:
-        return render_template("createLink.html", error_message="Sinun tulee kirjautua sisään ennen kuin voit lisätä lukuvinkkejä")
+        return render_template("createLink.html",
+            error_message="Sinun tulee kirjautua sisään ennen kuin voit lisätä lukuvinkkejä")
     return render_template("createLink.html")
 
 
 @app.route("/postlink", methods=["post"])
 def post_link():
     title = request.form["title"]
-    link_url = request.form["link_url"]     
+    link_url = request.form["link_url"]
     data = {"title":title,
             "link_url":link_url,
             "created_by": session["id"]}
@@ -46,7 +48,7 @@ def show_link(link_id):
 
 def haku():
     data = LINK_REPOSITORY.find_all()
-    data = filter(lambda x: request.args.get("search") in "{}{}".format(x.title, x.link_url), data)
+    data = filter(lambda x: request.args.get("search") in f"${x.title}{x.link_url}", data)
     return render_template("home.html", lukuvinkit=data)
 
 @app.route("/login")
@@ -67,7 +69,7 @@ def handle_register():
     input_username = request.form["username"]
     state = USER_REPOSITORY.register({"username":input_username,
                             "password":input_password})
-    
+
     if not state:
         return render_template("register.html", error_message="Käyttäjänimi on jo käytössä")
     return redirect("/login")
@@ -80,9 +82,10 @@ def handle_login():
     try:
         user = USER_REPOSITORY.login({"username":input_username,
                                 "password":input_password})
-    
+
     except Exception:
-        return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
+        return render_template("login.html",
+            error_message="Virheellinen käyttäjänimi tai salasana.")
     session["id"] = user["id"]
     session["username"]=user["username"]
     return redirect("/")
