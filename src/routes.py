@@ -94,7 +94,7 @@ def handle_login():
     if hash!=input_hash:
         return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
     session['id']=user[0].id
-    session['username']=username
+    session['user']=user
     print("testitäällä")
     return redirect("/")
 
