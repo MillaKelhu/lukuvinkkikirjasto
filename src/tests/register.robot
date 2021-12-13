@@ -1,7 +1,7 @@
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
-Suite Teardown  Close Browser
+Suite Teardown  Reset Register And Close Browser
 Test Setup  Open Register Page
 *** Test Cases ***
 
@@ -26,3 +26,7 @@ Submit
 Open Register Page
     Go To Register Page
     Register Page Should Be Open
+
+Reset Register And Close Browser
+    Reset Adding User  testiuser  123456
+    Close Browser

@@ -16,7 +16,10 @@ class UserRepository:
     def find_by_login_info(self, user):
         """Hakee käyttäjän tietokannasta Pythonin dictionary-olion username- ja password-kentän
         perusteella ja palauttaa kyseisen rivin
-        sqlalchemy.engine.RowProxy-oliona"""
+        sqlalchemy.engine.RowProxy-oliona
+        Huom. Metodin kutsujan vastuulla on kutsua commit-metodia
+        muutosten tallentamiseksi
+        Huom. Funktio on tarpeellinen, jotta löydetään kirjautumassa oleva käyttäjä, sillä tämän id ei ole tiedossa ennen kirjautumista"""
 
         query = "SELECT * FROM Users WHERE username = :username AND password = :password"
 
@@ -47,6 +50,17 @@ class UserRepository:
 
         query = "DELETE FROM Users WHERE id = :id"
         self.session.execute(query, {"id": user["id"]})
+
+    def delete_by_username_and_password(self, user):
+        """Hae käyttäjä tietokannasta Pythonin dictionary-olion username- ja password-kentän
+        perusteella ja poista kyseinen rivi.
+        Huom. Metodin kutsujan vastuulla on kutsua commit-metodia muutosten
+        tallentamiseksi
+        Huom. Funktiota käytetään vain robot-testien lopuksi, jotta testit voidaan suorittaa uudelleenkin"""
+
+        query = "DELETE FROM Users WHERE username = :username AND password = :password"
+
+        self.session.execute(query, {"username": user["username"], "password": user["password"]})
 
     def update(self, user):
         """Hae käyttäjä tietokannasta Pythonin dictionary-olion
