@@ -15,6 +15,11 @@ class AppLibrary:
         self.USER_REPOSITORY.delete_by_username_and_password({"username": username, "password": password})
         self.USER_REPOSITORY.commit()
 
+    def create_link(self, title, url, username, password):
+        id = self.USER_REPOSITORY.find_by_login_info({"username": username, "password": password})[0]
+        self.LINK_REPOSITORY.create({"title": title, "link_url": url, "created_by": id})
+        self.LINK_REPOSITORY.commit()
+
     def reset_adding_link(self, title, url):
         self.LINK_REPOSITORY.delete_by_title_and_url({"title": title, "link_url": url})
         self.LINK_REPOSITORY.commit()
