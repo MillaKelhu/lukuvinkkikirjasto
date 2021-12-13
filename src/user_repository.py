@@ -76,9 +76,13 @@ class UserRepository:
         query = """SELECT * FROM Users WHERE username=:username"""
         result = self.session.execute(query, {"username":user["username"]}).fetchone()
         
-        if result == None or self.check_password_hash(user["password"],result["password"]) == False:
-            return "Virheellinen käyttäjänimi tai salasana."
-        return result
+        #if result == None:
+        #    pass
+            #raise Exception
+        if self.check_password_hash(user["password"],result["password"]):
+            return result
+            #raise Exception
+        
 
     def register(self,user):
         """Metodi, joka vastaanottaa Pythonin dictionary-olion,
@@ -104,8 +108,9 @@ class UserRepository:
         """Metodi tarkastaa vastaako annettu salasana 
         tietokannassa olevaa salasanaa"""
 
-        input_password = input_password + \
-            "joiafhoufheoa3ijfla3dfnuneugyugeoj830803"
+        input_password += "joiafhoufheoa3ijfla3dfnuneugyugeoj830803"
         input_password = hashlib.sha256(input_password.encode()).hexdigest()
-        return input_password == db_password
+        if input_password == db_password:
+            return True
+        return False
 

@@ -77,10 +77,11 @@ def handle_register():
 def handle_login():
     input_password = request.form["password"]
     input_username = request.form["username"]
-    user = USER_REPOSITORY.login({"username":input_username,
+    try:
+        user = USER_REPOSITORY.login({"username":input_username,
                                 "password":input_password})
     
-    if type(user) == str:
-        return render_template("login.html", error_message=user)
+    except Exception:
+        return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
     session["id"] = user["id"]
     return redirect("/")

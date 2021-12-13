@@ -1,4 +1,4 @@
-import os
+import os, hashlib
 import unittest
 from user_repository import UserRepository
 from sqlalchemy import create_engine
@@ -8,15 +8,20 @@ class TestUserRepository(unittest.TestCase):
     def setUp(self):
         dirname = os.path.dirname(__file__)
         dbpath = os.path.join(dirname, "test.db")
-        engine = create_engine(f"sqlite:///{dbpath}")
+        self.dbpath = dbpath
+        schema_path = os.path.join(dirname, "test_schema.sql")
+        os.system(f"sqlite3 {dbpath} < {schema_path}")
+        self.engine = create_engine(f"sqlite:///{dbpath}")
         Session = sessionmaker()
-        Session.configure(bind=engine)
+        Session.configure(bind=self.engine)
         session = Session()
+        self.dirname = dirname
 
         self.user_repository = UserRepository(session)
 
     def tearDown(self):
-        pass
+        self.engine.dispose()
+        os.system(f"rm {self.dbpath}")
 
     def test_find_all(self):
         result = self.user_repository.find_all()
@@ -95,6 +100,7 @@ class TestUserRepository(unittest.TestCase):
 
         self.user_repository.register(user)
         result = self.user_repository.login(user)
+        print(type(result))
 
         self.assertEqual(user["username"],result["username"])
 
@@ -103,7 +109,15 @@ class TestUserRepository(unittest.TestCase):
                 "password":"pass"}
 
         self.user_repository.register(user)
-        user["password"] = "sbrölölöö"
+        user2 =  {"username":"user",
+                "password":"sbrölölöö"}
+    
+        with self.assertRaises(Exception):
+            result = self.user_repository.login(user2)
 
-        result = self.user_repository.login(user)
-        self.assertNotEqual(result["username",user["username"]])
+    def test_check_password_hash(self):
+        pass1 = "sbrölölöö"
+        pass2 = "sbrölölööjoiafhoufheoa3ijfla3dfnuneugyugeoj830803"
+        pass2 = hashlib.sha256(pass2.encode()).hexdigest()
+        state = self.user_repository.check_password_hash(pass1,pass1)
+        self.assertEqual(state,True)
