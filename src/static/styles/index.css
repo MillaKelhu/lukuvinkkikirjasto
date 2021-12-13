@@ -75,6 +75,12 @@ button {
 }
 
 .topbar-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 0px;
   height: 60px;
   background-color: #0059ff;
@@ -98,6 +104,13 @@ button {
 
 .topbar-container button:hover {
   border-top: 4px solid orange;
+}
+
+.username {
+  color: white;
+  padding: 0px;
+  margin-left: auto;
+  margin-right: 20px;
 }
 
 .topbar-buttons-container {

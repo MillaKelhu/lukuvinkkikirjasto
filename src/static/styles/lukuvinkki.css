@@ -5,10 +5,18 @@
   margin: 0px auto;
   width: 120px;
   height: 40px;
+  cursor: pointer;
+}
+
+.open-button {
   background-color: #006b00;
 }
 
-.link-button:hover {
+.open-button a {
+  text-decoration: none;
+}
+
+.open-button:hover {
   background-color: #009e00;
 }
 
@@ -19,5 +27,14 @@ h2 {
 .lukuvinkki-container {
   margin: 0px auto;
   width: 600px;
+}
+
+.remove-button {
+  margin-top: 10px;
+  background-color: #b90000;
+}
+
+.remove-button:hover {
+  background-color: #ec0000;
 }
 /*# sourceMappingURL=lukuvinkki.css.map */
