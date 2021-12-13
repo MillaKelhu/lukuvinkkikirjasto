@@ -15,9 +15,14 @@
             <a href="/addlink"><button class="">Lisää Lukuvinkki</button></a>
             {% if session.id %}
             <a href="/logout"><button class="">Kirjaudu ulos</button></a>
-            <a Käyttäjä: {{ session.username }} </a>
             {% else %}
             <a href="/login"><button class="">Kirjaudu sisään</button></a>
+            {% endif %}
+            {% if session.id %}
+        </div>
+        <div class="topbar-user_name-container">
+            {% if session.id %}
+            <p>Käyttäjä: {{ session.username }}</p>
             {% endif %}
         </div>
     </div>
