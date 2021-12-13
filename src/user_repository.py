@@ -39,8 +39,8 @@ class UserRepository:
 
         query = """INSERT INTO Users (username, password)
                VALUES (:username, :password) RETURNING*"""
-        return self.session.execute(query, {"username": user["username"],
-                                     "password": user["password"]}).fetchone()
+        self.session.execute(query, {"username": user["username"],
+                                     "password": user["password"]})
 
     def delete(self, user):
         """Hae käyttäjä tietokannasta Pythonin dictionary-olion id-kentän
