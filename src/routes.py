@@ -74,7 +74,6 @@ def handle_register():
         return render_template("register.html", error_message="Käyttäjänimi on jo käytössä")
 
 
-
 @app.route("/handlelogin", methods=["POST"])
 def handle_login():
     input_password = request.form["password"]
