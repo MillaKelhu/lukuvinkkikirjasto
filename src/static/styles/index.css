@@ -103,4 +103,24 @@ button {
 .topbar-buttons-container {
   margin-left: 20px;
 }
+
+.topbar-container text {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+  height: 60px;
+  border: 0px;
+  border-top: 4px solid transparent;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+}
+
+.topbar-container text:hover {
+  border-top: 4px solid orange;
+}
+
+.topbar-text-container {
+  margin-left: 20px;
+}
 /*# sourceMappingURL=index.css.map */

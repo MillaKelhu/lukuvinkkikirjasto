@@ -19,9 +19,11 @@
             <a href="/login"><button class="">Kirjaudu sisään</button></a>
             {% endif %}
         </div>
+        <div class="topbar-text-container">
         {% if session.id %}
-        <p> Käyttäjä: {{ session.username }} </p>
+        <p><text class="">Käyttäjä: {{ session.username }}<text></p>
         {% endif %}
+        </div>
     </div>
     {% block content %}
     {% endblock %}
