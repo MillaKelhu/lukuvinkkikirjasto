@@ -13,8 +13,17 @@ class UserRepository:
 
         return self.session.execute(query, {"id": user["id"]}).fetchone()
 
+    def find_by_login_info(self, user):
+        """Hakee käyttäjän tietokannasta Pythonin dictionary-olion username- ja password-kentän
+        perusteella ja palauttaa kyseisen rivin
+        sqlalchemy.engine.RowProxy-oliona"""
+
+        query = "SELECT * FROM Users WHERE username = :username AND password = :password"
+
+        return self.session.execute(query, {"username": user["username"], "password": user["password"]}).fetchone()
+
     def find_all(self):
-        """Hakeee kaikki käyttäjät tietokannasta ja palauttaa ne listana
+        """Hakee kaikki käyttäjät tietokannasta ja palauttaa ne listana
         sqlalchemy.engine.RowProxy-olioita"""
 
         return self.session.execute("SELECT * FROM Users").fetchall()
@@ -26,9 +35,9 @@ class UserRepository:
         muutosten tallentamiseksi"""
 
         query = """INSERT INTO Users (username, password)
-               VALUES (:username, :password)"""
-        self.session.execute(query, {"username": user["username"],
-                                     "password": user["password"]})
+               VALUES (:username, :password) RETURNING*"""
+        return self.session.execute(query, {"username": user["username"],
+                                     "password": user["password"]}).fetchone()
 
     def delete(self, user):
         """Hae käyttäjä tietokannasta Pythonin dictionary-olion id-kentän
