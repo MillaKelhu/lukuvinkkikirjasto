@@ -1,4 +1,5 @@
 ![GitHub Actions](https://github.com/MillaKelhu/lukuvinkkikirjasto/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/MillaKelhu/lukuvinkkikirjasto/branch/master/graph/badge.svg?token=ZRQYHHZZF9)](https://codecov.io/gh/MillaKelhu/lukuvinkkikirjasto)
 
 # Lukuvinkkikirjasto
 Lukuvinkkikirjasto on web-sovellus, joka on toteutettu Flaskilla ja viety [Herokuun](https://ryhma4ohtu2021miniproject.herokuapp.com/) käytettäväksi.

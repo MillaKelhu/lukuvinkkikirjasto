@@ -30,5 +30,8 @@ jobs:
         run: poetry run coverage run --branch -m pytest
       - name: Pylint code analysis
         run: poetry run pylint --fail-under=8 src/
-      - name: Run robot tests
-        run: bash run_robot_tests.sh
+      - name: Coverage report
+        run: poetry run coverage xml
+      - name: Coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
+
