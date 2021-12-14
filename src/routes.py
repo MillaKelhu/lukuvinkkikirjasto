@@ -24,8 +24,8 @@ def index():
 @app.route("/addlink")
 def add_link():
     if "id" not in session:
-        return render_template("createLink.html", error_message="Sinun tulee kirjautua sisään ennen kuin voit lisätä lukuvinkkejä")
-    return render_template("createLink.html")
+        return render_template("createLink.html", error_message="Sinun tulee kirjautua sisään ennen kuin voit lisätä lukuvinkkejä", session=session)
+    return render_template("createLink.html", session=session)
 
 
 @app.route("/postlink", methods=["post"])

@@ -8,6 +8,8 @@
     <h1>Syötä lukuvinkkisi nimi ja osoite</h1>
     <div class="form-input-container" id="form-input-container"></div>
     <p style="color: red">{{error_message}}</p>
+    {% if session %}
     <button class="add-button" type="submit">Lisää Lukuvinkki</button>
+    {% endif %}
 </form>
 {% endblock %}
