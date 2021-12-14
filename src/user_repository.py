@@ -42,6 +42,17 @@ class UserRepository:
         query = "DELETE FROM Users WHERE id = :id"
         self.session.execute(query, {"id": user["id"]})
 
+    def delete_by_username(self, user):
+        """Hae käyttäjä tietokannasta Pythonin dictionary-olion username-kentän
+        perusteella ja poista kyseinen rivi.
+        Huom. Metodin kutsujan vastuulla on kutsua commit-metodia muutosten
+        tallentamiseksi
+        Huom. Funktiota käytetään vain robot-testien lopuksi, jotta testit voidaan suorittaa uudelleenkin"""
+
+        query = "DELETE FROM Users WHERE username = :username"
+
+        self.session.execute(query, {"username": user["username"]})
+
     def update(self, user):
         """Hae käyttäjä tietokannasta Pythonin dictionary-olion
         id-kentän perusteella ja päivitä sen username- ja

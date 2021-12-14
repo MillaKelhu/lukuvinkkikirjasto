@@ -1,7 +1,7 @@
 *** Settings ***
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
-Suite Teardown  Close Browser
+Suite Teardown  Reset Added User And Link And Close Browser
 *** Test Cases ***
 
 Open Link Form Page
@@ -26,4 +26,9 @@ Set Url
     Input Text  link_url  ${link_url}
 
 Submit Link
-    Click Button  Lisää Lukuvinkki
+    Click Button  add link
+
+Reset Added User And Link And Close Browser
+    Reset Adding User  testiuser  12345
+    Reset Adding Link  Wikipedia  testilinkki
+    Close Browser

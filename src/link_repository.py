@@ -42,6 +42,16 @@ class LinkRepository:
         query = "DELETE FROM Links WHERE id = :id"
         self.session.execute(query, {"id": link["id"]})
 
+    def delete_by_title_and_url(self, link):
+        """Hae linkki tietokannasta Pythonin dictionary-olion title- ja link_url-kentän
+        perusteella ja poista kyseinen rivi.
+        Huom. Metodin kutsujan vastuulla on kutsua commit-metodia muutosten
+        tallentamiseksi
+        Huom. Älä käytä metodia varsinaisessa ohjelmassa, vaan pelkästään robot-testeissä"""
+
+        query = "DELETE FROM Links WHERE title = :title AND link_url = :link_url"
+        self.session.execute(query, {"title": link["title"], "link_url": link["link_url"]})
+
     def update(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion
         id-kentän perusteella ja päivitä sen title- ja
