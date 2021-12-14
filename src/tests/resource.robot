@@ -21,7 +21,7 @@ Go To Main Page
     Go To  ${HOME URL}
 
 Main Page Should Be Open
-    Page Should Contain  Lukuvinkidada
+    Page Should Contain  Lukuvinkidadat
 
 Go To Add Link Page
     Go To  ${ADDLINK URL}

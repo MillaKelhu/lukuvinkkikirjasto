@@ -1,11 +1,11 @@
 CREATE TABLE Users (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     username TEXT UNIQUE,
     password TEXT
 );
 
 CREATE TABLE Links (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     title TEXT,
     link_url TEXT,
     created_at TIMESTAMP,
