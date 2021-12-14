@@ -1,13 +1,29 @@
 {% extends "index.html" %}
 
 {% block content %}
-
+<script>
+    function handleClick() {
+        fetch("/links/{{id}}", {
+            headers: {
+                "accept": "Application/Json",
+            },
+            method: "delete"
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.replace("/")
+        })
+    }
+</script>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/lukuvinkki.css') }}">
 <div class="lukuvinkki-container">
     <h2 class="lukuvinkki-title">{{lukuvinkki.title}}</h2>
     <a class="avaa-lukuvinkki-link" href={{lukuvinkki.link_url}}>
-        <button class="link-button">Avaa Lukuvinkki</button>
+        <button class="link-button open-button">Avaa Lukuvinkki</button>
     </a>
+    {% if owned==True %}
+    <button onclick="handleClick()" class="link-button remove-button">Poista Lukuvinkki</button>
+    {% endif %}
 </div>  
 
 {% endblock %}
