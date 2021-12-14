@@ -21,7 +21,7 @@ Go To Main Page
     Go To  ${HOME URL}
 
 Main Page Should Be Open
-    Page Should Contain  Lukuvinkidadat
+    Page Should Contain  Lukuvinkit
 
 Go To Add Link Page
     Go To  ${ADDLINK URL}
@@ -45,6 +45,7 @@ User Should Not Be Logged In
     Page Should Contain  Kirjaudu sisään
 
 User Should Be Logged In
+    Page Should Contain  Kirjaudu ulos
 
 Authenticate
     Create User  testiuser  12345
