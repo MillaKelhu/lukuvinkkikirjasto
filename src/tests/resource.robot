@@ -36,10 +36,15 @@ Add Link Page Should Be Open
     Page Should Contain  Syötä lukuvinkkisi nimi ja osoite
 
 Register Page Should Be Open
-    Page Should Contain  Onko sinulla jo käyttäjä? Mene sisään
+    Page Should Contain  Onko sinulla jo käyttäjä? Kirjaudu sisään
 
 Login Page Should Be Open
     Page Should Contain  Eikö sinulla ole käyttäjää? Luo uusi käyttäjä
+
+User Should Not Be Logged In
+    Page Should Contain  Kirjaudu sisään
+
+User Should Be Logged In
 
 Authenticate
     Create User  testiuser  12345
