@@ -71,7 +71,7 @@ class UserRepository:
         Metodi tarkistaa mikäli käyttäjä on olemassa ja onko
         annettu salasana oikea. Palauttaa käyttäjän tiedot
         sqlalchemy.engine.RowProxy-oliona, mikäli käyttäjää
-        ei ole palauttaa virheilmoituksen."""
+        ei ole palauttaa virheilmoituksen"""
 
         query = """SELECT * FROM Users WHERE username=:username"""
         result = self.session.execute(query, {"username":user["username"]}).fetchone()
