@@ -4,6 +4,7 @@ from link_repository import LinkRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 class TestLinkRepository(unittest.TestCase):
     def setUp(self):
         dirname = os.path.dirname(__file__)

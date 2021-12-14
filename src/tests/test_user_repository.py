@@ -1,8 +1,10 @@
-import os, hashlib
+import os
+import hashlib
 import unittest
 from user_repository import UserRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
@@ -78,43 +80,43 @@ class TestUserRepository(unittest.TestCase):
         self.assertEqual(result[1], "user_one")
 
     def test_register(self):
-        user = {"username":"user",
-                "password":"pass"}
+        user = {"username": "user",
+                "password": "pass"}
 
         value = self.user_repository.register(user)
 
-        self.assertEqual(True,value)
+        self.assertEqual(True, value)
 
     def test_register_fails_when_username_in_use(self):
-        user = {"username":"user",
-                "password":"pass"}
+        user = {"username": "user",
+                "password": "pass"}
 
         self.user_repository.register(user)
         value = self.user_repository.register(user)
 
-        self.assertEqual(False,value)
+        self.assertEqual(False, value)
 
     def test_login(self):
-        user = {"username":"user",
-                "password":"pass"}
+        user = {"username": "user",
+                "password": "pass"}
 
         self.user_repository.register(user)
         result = self.user_repository.login(user)
 
-        self.assertEqual(user["username"],result["username"])
+        self.assertEqual(user["username"], result["username"])
 
     def test_login_with_incorrect_password(self):
-        user = {"username":"user",
-                "password":"pass"}
+        user = {"username": "user",
+                "password": "pass"}
 
         self.user_repository.register(user)
-        user2 =  {"username":"user",
-                "password":"sbrölölöö"}
-    
+        user2 = {"username": "user",
+                 "password": "sbrölölöö"}
+
         with self.assertRaises(Exception):
             result = self.user_repository.login(user2)
 
     def test_login_with_nonexistent_user(self):
         with self.assertRaises(Exception):
-            self.user_repository.login({"username":"käyttis",
-                                        "password":"salis"})
+            self.user_repository.login({"username": "käyttis",
+                                        "password": "salis"})

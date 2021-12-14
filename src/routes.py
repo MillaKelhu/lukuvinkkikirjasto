@@ -4,7 +4,8 @@ from flask.helpers import make_response
 from db import configure_db
 from link_repository import LinkRepository
 from user_repository import UserRepository
-import os, hashlib
+import os
+import hashlib
 
 app = Flask(__name__)
 db = configure_db(app)
@@ -31,25 +32,29 @@ def add_link():
 @app.route("/postlink", methods=["post"])
 def post_link():
     title = request.form["title"]
-    link_url = request.form["link_url"]     
-    data = {"title":title,
-            "link_url":link_url,
+    link_url = request.form["link_url"]
+    data = {"title": title,
+            "link_url": link_url,
             "created_by": session["id"]}
     LINK_REPOSITORY.create(data)
     LINK_REPOSITORY.commit()
     return redirect("/")
 
+
 @app.get("/links/<int:link_id>")
 def show_link(link_id):
-    data = LINK_REPOSITORY.find({"id":link_id})
-    owned = session and data.created_by==session["id"]
+    data = LINK_REPOSITORY.find({"id": link_id})
+    owned = session and data.created_by == session["id"]
     return render_template("lukuvinkki.html", lukuvinkki=data, id=link_id, owned=owned)
-@app.route("/lukuvinkki_haku")
 
+
+@app.route("/lukuvinkki_haku")
 def haku():
     data = LINK_REPOSITORY.find_all()
-    data = filter(lambda x: request.args.get("search") in "{}{}".format(x.title, x.link_url), data)
+    data = filter(lambda x: request.args.get("search")
+                  in "{}{}".format(x.title, x.link_url), data)
     return render_template("home.html", lukuvinkit=data)
+
 
 @app.route("/login")
 def login():
@@ -69,18 +74,18 @@ def handle_register():
     input_username = request.form["username"]
     state = USER_REPOSITORY.register(
         {
-        "username":input_username,
-        "password":input_password
+            "username": input_username,
+            "password": input_password
         })
     USER_REPOSITORY.commit()
     try:
         user = USER_REPOSITORY.login(
             {
-                "username":input_username,
-                "password":input_password
+                "username": input_username,
+                "password": input_password
             })
         session["id"] = user["id"]
-        session["username"]=user["username"]
+        session["username"] = user["username"]
     except Exception:
         return render_template("register.html", error_message="Käyttäjänimi on jo käytössä")
     return redirect("/")
@@ -93,26 +98,28 @@ def handle_login():
     try:
         user = USER_REPOSITORY.login(
             {
-                "username":input_username,
-                "password":input_password
+                "username": input_username,
+                "password": input_password
             })
-    
+
     except Exception:
         return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
     session["id"] = user["id"]
-    session["username"]=user["username"]
+    session["username"] = user["username"]
     return redirect("/")
+
 
 @app.route("/handlelogout")
 def handle_logout():
     session.clear()
     return redirect("/")
 
+
 @app.delete("/links/<link_id>")
 def delete_link(link_id):
     data = LINK_REPOSITORY.find({"id": link_id})
-    if data.created_by!=session["id"]:
-        return {"success":False}
+    if data.created_by != session["id"]:
+        return {"success": False}
     try:
         LINK_REPOSITORY.delete({"id": link_id})
         LINK_REPOSITORY.commit()

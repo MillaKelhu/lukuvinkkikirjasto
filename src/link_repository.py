@@ -32,7 +32,6 @@ class LinkRepository:
                                      "created_by": link["created_by"]}
                              )
 
-
     def delete(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion id-kentän
         perusteella ja poista kyseinen rivi.
@@ -50,7 +49,8 @@ class LinkRepository:
         Huom. Älä käytä metodia varsinaisessa ohjelmassa, vaan pelkästään robot-testeissä"""
 
         query = "DELETE FROM Links WHERE title = :title AND link_url = :link_url"
-        self.session.execute(query, {"title": link["title"], "link_url": link["link_url"]})
+        self.session.execute(
+            query, {"title": link["title"], "link_url": link["link_url"]})
 
     def update(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion
@@ -63,7 +63,7 @@ class LinkRepository:
                link_url = :link_url WHERE id = :id"""
         return self.session.execute(query, {"id": link["id"],
                                     "title": link["title"],
-                                    "link_url": link["link_url"]}
+                                            "link_url": link["link_url"]}
                                     )
 
     def commit(self):
