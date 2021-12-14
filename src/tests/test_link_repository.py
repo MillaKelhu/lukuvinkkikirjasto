@@ -4,18 +4,24 @@ from link_repository import LinkRepository
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 class TestLinkRepository(unittest.TestCase):
     def setUp(self):
-        engine = create_engine(f"postgresql+psycopg2://localhost")
+        dirname = os.path.dirname(__file__)
+        self.dirname = dirname
+        dbpath = os.path.join(dirname, "test.db")
+        self.dbpath = dbpath
+        schema_path = os.path.join(dirname, "test_schema.sql")
+        os.system(f"sqlite3 {dbpath} < {schema_path}")
+        self.engine = create_engine(f"sqlite:///{dbpath}")
         Session = sessionmaker()
-        Session.configure(bind=engine)
+        Session.configure(bind=self.engine)
         session = Session()
 
         self.link_repository = LinkRepository(session)
 
     def tearDown(self):
-        pass
+        self.engine.dispose()
+        os.system(f"rm {self.dbpath}")
 
     def test_find_all(self):
         result = self.link_repository.find_all()
@@ -52,7 +58,9 @@ class TestLinkRepository(unittest.TestCase):
 
         self.assertEqual(result[1], "Spark")
 
-        result = self.link_repository.update(link)
+        self.link_repository.update(link)
+
+        result = self.link_repository.find(link)
 
         self.assertEqual(result[1], "Apache Spark")
 
