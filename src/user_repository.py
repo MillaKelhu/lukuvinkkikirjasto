@@ -1,3 +1,6 @@
+from werkzeug.security import check_password_hash, generate_password_hash
+from os import X_OK
+
 class UserRepository:
     def __init__(self, session):
         """Konstruktoi sqlalchemy-sessiosta linkki-repositorion"""
@@ -9,24 +12,12 @@ class UserRepository:
         perusteella ja palauttaa kyseisen rivin
         sqlalchemy.engine.RowProxy-oliona"""
 
-        query = "SELECT * FROM Users WHERE id = :id"
+        query = "SELECT * FROM  Users WHERE id = :id"
 
         return self.session.execute(query, {"id": user["id"]}).fetchone()
 
-    def find_by_login_info(self, user):
-        """Hakee käyttäjän tietokannasta Pythonin dictionary-olion username- ja password-kentän
-        perusteella ja palauttaa kyseisen rivin
-        sqlalchemy.engine.RowProxy-oliona
-        Huom. Metodin kutsujan vastuulla on kutsua commit-metodia
-        muutosten tallentamiseksi
-        Huom. Funktio on tarpeellinen, jotta löydetään kirjautumassa oleva käyttäjä, sillä tämän id ei ole tiedossa ennen kirjautumista"""
-
-        query = "SELECT * FROM Users WHERE username = :username AND password = :password"
-
-        return self.session.execute(query, {"username": user["username"], "password": user["password"]}).fetchone()
-
     def find_all(self):
-        """Hakee kaikki käyttäjät tietokannasta ja palauttaa ne listana
+        """Hakeee kaikki käyttäjät tietokannasta ja palauttaa ne listana
         sqlalchemy.engine.RowProxy-olioita"""
 
         return self.session.execute("SELECT * FROM Users").fetchall()
@@ -38,7 +29,7 @@ class UserRepository:
         muutosten tallentamiseksi"""
 
         query = """INSERT INTO Users (username, password)
-               VALUES (:username, :password) RETURNING*"""
+               VALUES (:username, :password)"""
         self.session.execute(query, {"username": user["username"],
                                      "password": user["password"]})
 
@@ -51,16 +42,16 @@ class UserRepository:
         query = "DELETE FROM Users WHERE id = :id"
         self.session.execute(query, {"id": user["id"]})
 
-    def delete_by_username_and_password(self, user):
-        """Hae käyttäjä tietokannasta Pythonin dictionary-olion username- ja password-kentän
+    def delete_by_username(self, user):
+        """Hae käyttäjä tietokannasta Pythonin dictionary-olion username-kentän
         perusteella ja poista kyseinen rivi.
         Huom. Metodin kutsujan vastuulla on kutsua commit-metodia muutosten
         tallentamiseksi
         Huom. Funktiota käytetään vain robot-testien lopuksi, jotta testit voidaan suorittaa uudelleenkin"""
 
-        query = "DELETE FROM Users WHERE username = :username AND password = :password"
+        query = "DELETE FROM Users WHERE username = :username"
 
-        self.session.execute(query, {"username": user["username"], "password": user["password"]})
+        self.session.execute(query, {"username": user["username"]})
 
     def update(self, user):
         """Hae käyttäjä tietokannasta Pythonin dictionary-olion
@@ -84,3 +75,39 @@ class UserRepository:
         """Peruuta muutokset tietokantaan"""
 
         self.session.rollback()
+
+    def login(self,user):
+        """Hakee käyttäjän tietokannasta Pythonin dictionary-olion
+        user perusteella, jolla on kentät username ja password.
+        Metodi tarkistaa mikäli käyttäjä on olemassa ja onko
+        annettu salasana oikea. Palauttaa käyttäjän tiedot
+        sqlalchemy.engine.RowProxy-oliona, mikäli käyttäjää
+        ei ole palauttaa virheilmoituksen."""
+
+        query = """SELECT * FROM Users WHERE username=:username"""
+        result = self.session.execute(query, {"username":user["username"]}).fetchone()
+        
+        if result == None:
+            raise Exception
+        if check_password_hash(result["password"],user["password"]) == False:
+            raise Exception
+        return result
+        
+
+    def register(self,user):
+        """Metodi, joka vastaanottaa Pythonin dictionary-olion,
+        jolla on kentät username ja password. Metodi tarkastaa
+        onko käyttäjänimi jo käytössä, jos ei ole se kutsuu
+        metodia create hashattyään salasanan, jonka jälkeen
+        committaa muutoksen tietokantaan. Mikäli käyttäjänimi
+        on käytössä metodi palauttaa False."""
+
+        new_user = {"username":user["username"],
+                    "password":generate_password_hash(user["password"])}
+
+        try:
+            self.create(new_user)
+            self.commit()
+            return True
+        except Exception:
+            return False

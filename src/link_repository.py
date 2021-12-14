@@ -26,11 +26,12 @@ class LinkRepository:
         muutosten tallentamiseksi"""
 
         query = """INSERT INTO Links (title, link_url, created_at, created_by)
-               VALUES (:title, :link_url, DATE('now'), :created_by)"""
+               VALUES (:title, :link_url, datetime('now'), :created_by)"""
         self.session.execute(query, {"title": link["title"],
                                      "link_url": link["link_url"],
                                      "created_by": link["created_by"]}
                              )
+
 
     def delete(self, link):
         """Hae linkki tietokannasta Pythonin dictionary-olion id-kentän

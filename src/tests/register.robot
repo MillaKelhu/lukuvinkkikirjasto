@@ -9,7 +9,7 @@ User Can Register
     Set Username  testiuser
     Set Password  123456
     Submit
-    Login Page Should Be Open
+    Main Page Should Be Open
 
 User Can Not Register With Existing Username
     Create Existing User

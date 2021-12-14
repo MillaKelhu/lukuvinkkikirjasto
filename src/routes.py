@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
+from flask.helpers import make_response
 
 from db import configure_db
 from link_repository import LinkRepository
@@ -38,10 +39,11 @@ def post_link():
     LINK_REPOSITORY.commit()
     return redirect("/")
 
-@app.route("/links/<int:link_id>")
+@app.get("/links/<int:link_id>")
 def show_link(link_id):
     data = LINK_REPOSITORY.find({"id":link_id})
-    return render_template("lukuvinkki.html", lukuvinkki=data)
+    owned = session and data.created_by==session["id"]
+    return render_template("lukuvinkki.html", lukuvinkki=data, id=link_id, owned=owned)
 @app.route("/lukuvinkki_haku")
 
 def haku():
@@ -65,23 +67,37 @@ def register():
 def handle_register():
     input_password = request.form["password"]
     input_username = request.form["username"]
+    state = USER_REPOSITORY.register(
+        {
+        "username":input_username,
+        "password":input_password
+        })
+    USER_REPOSITORY.commit()
     try:
-        USER_REPOSITORY.create({"username":input_username,
-                                "password":input_password})
-        USER_REPOSITORY.commit()
-        return redirect("/login")
+        user = USER_REPOSITORY.login(
+            {
+                "username":input_username,
+                "password":input_password
+            })
+        session["id"] = user["id"]
+        session["username"]=user["username"]
     except Exception:
         return render_template("register.html", error_message="Käyttäjänimi on jo käytössä")
+    return redirect("/")
 
 
 @app.route("/handlelogin", methods=["POST"])
 def handle_login():
     input_password = request.form["password"]
     input_username = request.form["username"]
-    user = USER_REPOSITORY.find_by_login_info({"username":input_username,
-                                "password":input_password})
-
-    if not user:
+    try:
+        user = USER_REPOSITORY.login(
+            {
+                "username":input_username,
+                "password":input_password
+            })
+    
+    except Exception:
         return render_template("login.html", error_message="Virheellinen käyttäjänimi tai salasana.")
     session["id"] = user["id"]
     session["username"]=user["username"]
@@ -89,6 +105,17 @@ def handle_login():
 
 @app.route("/handlelogout")
 def handle_logout():
-    del session["id"]
-    del session["username"]
+    session.clear()
     return redirect("/")
+
+@app.delete("/links/<link_id>")
+def delete_link(link_id):
+    data = LINK_REPOSITORY.find({"id": link_id})
+    if data.created_by!=session["id"]:
+        return {"success":False}
+    try:
+        LINK_REPOSITORY.delete({"id": link_id})
+        LINK_REPOSITORY.commit()
+    except Exception:
+        return {"success": False}
+    return {"success": True}
