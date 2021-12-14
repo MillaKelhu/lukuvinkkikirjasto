@@ -7,7 +7,7 @@ load_dotenv(find_dotenv())
 
 def configure_db(app):
     uri = os.environ.get("SQLITE_URL")
-    app.config["SQLALCHEMY_DATABASE_URI"] = uri
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///main.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db = SQLAlchemy(app)
     dbpath = "../main.db"
