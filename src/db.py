@@ -10,4 +10,7 @@ def configure_db(app):
     app.config["SQLALCHEMY_DATABASE_URI"] = uri
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db = SQLAlchemy(app)
+    dbpath = "../main.db"
+    schema_path = "../schema.sql"
+    os.system(f"sqlite3 {dbpath} < {schema_path}")
     return db
