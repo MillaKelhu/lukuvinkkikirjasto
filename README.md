@@ -22,3 +22,6 @@ Sovellukseen voi rekisteröityä ja kirjautua, mikä vaaditaan lukuvinkkien lis�
 - Koodin staattinen analyysi on kunnossa (pylint >8 pistettä)
 - Koodi on dokumentoitu suomeksi docstringia noudattaen
 - Koodi on puskettu tuotantoympäristöön
+
+# Raportti
+[Miniprojektin loppuraportti](https://github.com/MillaKelhu/lukuvinkkikirjasto/blob/master/Loppuraportti.pdf)
